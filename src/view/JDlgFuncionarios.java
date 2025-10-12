@@ -4,6 +4,11 @@
  */
 package view;
 
+import bean.GdcbFuncionario;
+import dao.gdcb_funcionarioDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tools.Util;
 
@@ -12,6 +17,8 @@ import tools.Util;
  * @author Acer
  */
 public class JDlgFuncionarios extends javax.swing.JDialog {
+
+    private boolean incluir;
 
     /**
      * Creates new form JDlgFuncionarios
@@ -24,6 +31,56 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
         Util.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
+    }
+
+    public void beanView(GdcbFuncionario funcionarios) {
+        jFmtIdfuncionario.setText(Util.intToStr(funcionarios.getGdcbIdfuncionario()));
+        JtxtNome.setText(funcionarios.getGdcbNomeFuncionario());
+        JtxtEmail.setText(funcionarios.getGdcbEmailFuncionario());
+        jFmtCPF.setText(funcionarios.getGdcbCpfFuncionario());
+        jFmtDataNascimento.setText(Util.dateToStr(funcionarios.getGdcbDataNascimentoFuncionario()));
+        jCboCargo.setSelectedItem(funcionarios.getGdcbCargo());
+
+        if (funcionarios.getGdcbClt().equals("S")) {
+            jChbCLT.setSelected(true);
+        } else {
+            jChbCLT.setSelected(false);
+        }
+
+        if (funcionarios.getGdcbAtivo().equals("S")) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+
+    }
+
+    public GdcbFuncionario viewBean() throws ParseException {
+        GdcbFuncionario funcionarios = new GdcbFuncionario();
+
+        int codigo = Util.strToInt(jFmtIdfuncionario.getText());
+        funcionarios.setGdcbIdfuncionario(codigo);
+
+        funcionarios.setGdcbNomeFuncionario(JtxtNome.getText());
+        funcionarios.setGdcbEmailFuncionario(JtxtEmail.getText());
+        funcionarios.setGdcbCpfFuncionario(jFmtCPF.getText());
+        funcionarios.setGdcbDataNascimentoFuncionario(Util.strToDate(jFmtDataNascimento.getText()));
+
+        funcionarios.setGdcbCargo(jCboCargo.getSelectedItem().toString());
+
+        if (jChbCLT.isSelected()) {
+            funcionarios.setGdcbClt("S");
+        } else {
+            funcionarios.setGdcbClt("N");
+        }
+
+        if (jChbAtivo.isSelected()) {
+            funcionarios.setGdcbAtivo("S");
+        } else {
+            funcionarios.setGdcbAtivo("N");
+        }
+
+        return funcionarios;
     }
 
     /**
@@ -294,17 +351,20 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        java.awt.Window parentWindow = javax.swing.SwingUtilities.getWindowAncestor(this);
-        JDlgPesquisarFuncionarios telaPesquisa = new JDlgPesquisarFuncionarios((java.awt.Frame) parentWindow, true);
-        telaPesquisa.setVisible(true);  //add a tela
+        JDlgFuncionariosPesquisar jDlgFuncionariosPesquisar = new JDlgFuncionariosPesquisar(null, true);
+        jDlgFuncionariosPesquisar.setTelaAnterior(this);
+        jDlgFuncionariosPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void JbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnExcluirActionPerformed
-        Util.habilitar(true, jFmtIdfuncionario, JtxtNome, JtxtEmail,
-                jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
-
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
+        if (Util.pergunta("Deseja excluir ?") == true) {
+            gdcb_funcionarioDAO gdcb_funcionarioDAO = new gdcb_funcionarioDAO();
+            try {
+                gdcb_funcionarioDAO.delete(viewBean());
+            } catch (ParseException ex) {
+                Logger.getLogger(JDlgFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     }//GEN-LAST:event_JbtnExcluirActionPerformed
 
@@ -313,12 +373,36 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
         Util.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
-
+        Util.limpar(jFmtIdfuncionario, JtxtNome, JtxtEmail,
+                jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
+                jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        int cod = Util.strToInt(jFmtIdfuncionario.getText());
+
+        gdcb_funcionarioDAO gdcb_funcionarioDAO = new gdcb_funcionarioDAO();
+        GdcbFuncionario gdcb_funcionario = null;
+        try {
+            gdcb_funcionario = viewBean();
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (incluir == true) {
+            gdcb_funcionarioDAO.insert(gdcb_funcionario);
+
+        } else {
+            gdcb_funcionarioDAO.update(gdcb_funcionario);
+
+        }
+        Util.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
+                jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
+                jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
+
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtIdfuncionario, JtxtNome, JtxtEmail,
+                jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
+                jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
@@ -328,6 +412,10 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
 
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtIdfuncionario, JtxtNome, JtxtEmail,
+                jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
+                jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     /**

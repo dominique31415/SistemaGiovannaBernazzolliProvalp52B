@@ -4,15 +4,22 @@
  */
 package view;
 
+import bean.GdcbProdutos;
+import dao.gdcb_produtosDAO;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tools.Util;
-
 
 /**
  *
  * @author Acer
  */
 public class JDlgProdutos extends javax.swing.JDialog {
+
+    private boolean incluir;
 
     /**
      * Creates new form JDlgProdutos
@@ -25,6 +32,41 @@ public class JDlgProdutos extends javax.swing.JDialog {
         Util.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
+    }
+
+    public void beanView(GdcbProdutos produtos) {
+        JlbId1.setText(Util.intToStr(produtos.getGdcbIdprodutos()));
+        JtxtNome.setText(produtos.getGdcbNomeProduto());
+        JtxtMarca.setText(produtos.getGdcbMarca());
+        jCboPopularidade.setSelectedItem(produtos.getGdcbPopularidade());
+        jCboTipoL.setSelectedItem(produtos.getGdcbTipo());
+        JtxtClassificacaoIdade.setText(produtos.getGdcbClassificacaoIdade());
+        JFmtPreco.setText(produtos.getGdcbPreco().toString());
+        JtxtAutorLivro.setText(produtos.getGdcbAutor());
+    }
+
+    public GdcbProdutos viewBean() throws ParseException {
+        GdcbProdutos produtos = new GdcbProdutos();
+        int codigo = Util.strToInt(JlbId1.getText());
+        produtos.setGdcbIdprodutos(codigo);
+
+        produtos.setGdcbNomeProduto(JtxtNome.getText());
+        produtos.setGdcbMarca(JtxtMarca.getText());
+        produtos.setGdcbPopularidade(jCboPopularidade.getSelectedItem() != null
+                ? jCboPopularidade.getSelectedItem().toString() : "");
+        produtos.setGdcbTipo(jCboTipoL.getSelectedItem() != null
+                ? jCboTipoL.getSelectedItem().toString() : "");
+        produtos.setGdcbClassificacaoIdade(JtxtClassificacaoIdade.getText());
+        produtos.setGdcbAutor(JtxtAutorLivro.getText());
+
+        try {
+            BigDecimal preco = new BigDecimal(JFmtPreco.getText());
+            produtos.setGdcbPreco(preco);
+        } catch (NumberFormatException e) {
+            produtos.setGdcbPreco(BigDecimal.ZERO);
+        }
+
+        return produtos;
     }
 
     /**
@@ -331,10 +373,9 @@ public class JDlgProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        java.awt.Window parentWindow = javax.swing.SwingUtilities.getWindowAncestor(this);
-        JDlgPesquisarProdutos telaPesquisa = new JDlgPesquisarProdutos((java.awt.Frame) parentWindow, true);
-        telaPesquisa.setVisible(true);  //add a tela// TODO add your handling code here:
-        //add tela
+        JDlgProdutosPesquisar jDlgProdutosPesquisar = new JDlgProdutosPesquisar(null, true);
+        jDlgProdutosPesquisar.setTelaAnterior(this);
+        jDlgProdutosPesquisar.setVisible(true);
 
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
@@ -343,20 +384,32 @@ public class JDlgProdutos extends javax.swing.JDialog {
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+                JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro); // TODO add your handling code here:
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        Util.pergunta("Desja excluir??");
-
+        if (Util.pergunta("Deseja excluir ?") == true) {
+            gdcb_produtosDAO gdcb_produtosDAO = new gdcb_produtosDAO();
+            try {
+                gdcb_produtosDAO.delete(viewBean());
+            } catch (ParseException ex) {
+                Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        Util.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+                JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-
-        JOptionPane.showConfirmDialog(null, "Deseja continuar Alterar algum dado?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
         Util.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+
+        incluir = false;
+
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed

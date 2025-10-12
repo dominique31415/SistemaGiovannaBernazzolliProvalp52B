@@ -4,9 +4,11 @@
  */
 package view;
 
-
-
-import javax.swing.JOptionPane;
+import bean.GdcbUsuarios;
+import dao.gdcb_usuariosDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import tools.Util;
 
 /*
@@ -14,6 +16,8 @@ import tools.Util;
  * @author Acer
  */
 public class JDlgUsuarios extends javax.swing.JDialog {
+
+    private boolean incluir;
 
     /**
      * Creates new form JDlgUsuarios
@@ -27,7 +31,45 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                 jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
-    } 
+    }
+
+    public void beanView(GdcbUsuarios usuarios) {
+        JlbId1.setText(Util.intToStr(usuarios.getGdcbIdusuarios()));
+        JtxtNome.setText(usuarios.getGdcbNome());
+        JtxtApelido.setText(usuarios.getGdcbApelido());
+        jFmtCPF.setText(usuarios.getGdcbCpf());
+        jFmtDataNascimento.setText(Util.dateToStr(usuarios.getGdcbDataNascimento()));
+        jPwdSenha.setText(usuarios.getGdcbSenha());
+        jCboNivel.setSelectedIndex(usuarios.getGdcbNivel());
+        //jChbAtivo.setSelected( usuarios.getAtivo().equals("S"));
+        if (usuarios.getGdcbAtivo().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+
+    }
+
+    public GdcbUsuarios viewBean() throws ParseException {
+        GdcbUsuarios usuarios = new GdcbUsuarios();
+        int codigo = Util.strToInt(jFmtIdUsuario.getText());
+        usuarios.setGdcbIdusuarios(codigo);
+        //usuarios.setIdusuarios(Util.strToInt( jTxtCodigo.getText() ));
+
+        usuarios.setGdcbNome(JtxtNome.getText());
+        usuarios.setGdcbApelido(JtxtApelido.getText());
+        usuarios.setGdcbCpf(jFmtCPF.getText());
+        usuarios.setGdcbDataNascimento(Util.strToDate(jFmtDataNascimento.getText()));
+        usuarios.setGdcbSenha(jPwdSenha.getText());
+        usuarios.setGdcbNivel(jCboNivel.getSelectedIndex());
+        if (jChbAtivo.isSelected() == true) {
+            usuarios.setGdcbAtivo("S");
+        } else {
+            usuarios.setGdcbAtivo("N");
+        }
+        return usuarios;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -267,41 +309,55 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jPwdSenhaActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        Util.habilitar(false, jFmtIdUsuario, JtxtNome, JtxtApelido,
-                jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar);
-
+        Util.habilitar(false, jFmtIdUsuario, JlbNome, JtxtApelido, jFmtCPF,
+                jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
-        Util.limpar(jFmtIdUsuario, JtxtNome, jCboNivel); // TODO add your handling code here:
+        Util.limpar(jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF, jFmtDataNascimento,
+                jPwdSenha, jCboNivel, jChbAtivo);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-       java.awt.Window parentWindow = javax.swing.SwingUtilities.getWindowAncestor(this);
-        JDlgPesquisarUsuarios telaPesquisa = new JDlgPesquisarUsuarios((java.awt.Frame) parentWindow, true);
-        telaPesquisa.setVisible(true); //add a tela
+        JDlgUsuariosPesquisar jDlgUsuariosPesquisar = new JDlgUsuariosPesquisar(null, true);
+        jDlgUsuariosPesquisar.setTelaAnterior(this);
+        jDlgUsuariosPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        Util.habilitar(true, jFmtIdUsuario, JtxtNome, JtxtApelido,
-                jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar);
-
+        Util.habilitar(true, jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF,
+                jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF, jFmtDataNascimento,
+                jPwdSenha, jCboNivel, jChbAtivo);
+
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        Util.pergunta("Desja excluir??");
-
+      if (Util.pergunta("Deseja excluir ?") == true) {
+          gdcb_usuariosDAO usuariosDAO = new gdcb_usuariosDAO();
+          try {
+              usuariosDAO.delete(viewBean());
+          } catch (ParseException ex) {
+              Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        }
+          Util.limpar(jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF, jFmtDataNascimento,
+                jPwdSenha, jCboNivel, jChbAtivo);
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
 
-        JOptionPane.showConfirmDialog(null, "Deseja continuar Alterar algum dado?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
+       
         Util.habilitar(false, jFmtIdUsuario, JtxtNome, JtxtApelido,
                 jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        
+                incluir = false;
+
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed

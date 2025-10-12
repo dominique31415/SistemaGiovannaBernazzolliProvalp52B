@@ -1,5 +1,10 @@
 package view;
 
+import bean.GdcbCliente;
+import dao.gdcb_clientesDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tools.Util;
 
@@ -13,8 +18,10 @@ import tools.Util;
  */
 public class JDlgCliente extends javax.swing.JDialog {
 
+    private boolean incluir;
+
     /**
-     * Creates new form JDlgUsuarios
+     * Creates new form JDlgGdcbClientes
      */
     public JDlgCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -26,6 +33,60 @@ public class JDlgCliente extends javax.swing.JDialog {
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
+    }
+
+    public void beanView(GdcbCliente clientes) {
+        jFmtIdCliente.setText(Util.intToStr(clientes.getGdcbIdcliente()));
+        JtxtNome.setText(clientes.getGdcbNome());
+        jFmtIdCliente.setText(Util.intToStr(clientes.getGdcbIdcliente()));
+        JtxtNome.setText(clientes.getGdcbNome());
+        JtxtBairro.setText(clientes.getGdcbBairro());
+        jFmtCPF.setText(clientes.getGdcbCpf());
+        jFmtRG.setText(clientes.getGdcbRg());
+        jFmtDataNascimento.setText(Util.dateToStr(clientes.getGdcbDataNascimento()));
+        JtxtEmail.setText(clientes.getGdcbEmail());
+        jFmtCEP.setText(clientes.getGdcbCep());
+        JtxtNumeroCasa.setText(String.valueOf(clientes.getGdcbNumeroCasa()));
+        JtxtNomeRua.setText(clientes.getGdcbNomeRua());
+        JtxtCidade.setText(clientes.getGdcbCidade());
+        JtxtNumeroCelular.setText(clientes.getGdcbNumeroCelular());
+        JtxtEscolaridade.setText(clientes.getGdcbEscolaridade());
+        JtxtCurso.setText(clientes.getGdcbCursoAtual());
+        jCboSexo.setSelectedItem(clientes.getGdcbSexo());
+
+        if (clientes.getGdcbAtivo() == 'S') {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+    }
+
+    public GdcbCliente viewBean() throws ParseException {
+        GdcbCliente clientes = new GdcbCliente();
+        int codigo = Util.strToInt(jFmtIdCliente.getText());
+        clientes.setGdcbIdcliente(codigo);
+
+        clientes.setGdcbNome(JtxtNome.getText());
+        clientes.setGdcbBairro(JtxtBairro.getText());
+        clientes.setGdcbCpf(jFmtCPF.getText());
+        clientes.setGdcbRg(jFmtRG.getText());
+        clientes.setGdcbDataNascimento(Util.strToDate(jFmtDataNascimento.getText()));
+        clientes.setGdcbEmail(JtxtEmail.getText());
+        clientes.setGdcbCep(jFmtCEP.getText());
+        clientes.setGdcbNumeroCasa(Util.strToInt(JtxtNumeroCasa.getText()));
+        clientes.setGdcbNomeRua(JtxtNomeRua.getText());
+        clientes.setGdcbCidade(JtxtCidade.getText());
+        clientes.setGdcbNumeroCelular(JtxtNumeroCelular.getText());
+        clientes.setGdcbEscolaridade(JtxtEscolaridade.getText());
+        clientes.setGdcbCursoAtual(JtxtCurso.getText());
+        clientes.setGdcbSexo(jCboSexo.getSelectedItem().toString());
+
+        if (jChbAtivo.isSelected()) {
+            clientes.setGdcbAtivo('S');
+        } else {
+            clientes.setGdcbAtivo('N');
+        }
+        return clientes;
     }
 
     /**
@@ -440,9 +501,9 @@ public class JDlgCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_JtxtCursoActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        java.awt.Window parentWindow = javax.swing.SwingUtilities.getWindowAncestor(this);
-        JDlgPesquisarCliente telaPesquisa = new JDlgPesquisarCliente((java.awt.Frame) parentWindow, true);
-        telaPesquisa.setVisible(true);
+        JDlgClientesPesquisar jDlgClientesPesquisar = new JDlgClientesPesquisar(null, true);
+        jDlgClientesPesquisar.setTelaAnterior(this);
+        jDlgClientesPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -452,16 +513,22 @@ public class JDlgCliente extends javax.swing.JDialog {
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtIdCliente, JtxtBairro,
+                jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
+                JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo, jChbAtivo);
+
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        JOptionPane.showConfirmDialog(null, "Deseja continuar Alterar algum dado?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
         Util.habilitar(false, jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
@@ -483,8 +550,14 @@ public class JDlgCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        Util.pergunta("Desja excluir??");
-
+        if (Util.pergunta("Deseja excluir ?") == true) {
+            gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
+          try {
+              clientesDAO.delete(viewBean());
+          } catch (ParseException ex) {
+              Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        }
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     /**
