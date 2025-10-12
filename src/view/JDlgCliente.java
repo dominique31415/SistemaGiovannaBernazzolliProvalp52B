@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.text.html.HTML.Tag.S;
 import tools.Util;
 
 /*
@@ -53,12 +54,12 @@ public class JDlgCliente extends javax.swing.JDialog {
         JtxtEscolaridade.setText(clientes.getGdcbEscolaridade());
         JtxtCurso.setText(clientes.getGdcbCursoAtual());
         jCboSexo.setSelectedItem(clientes.getGdcbSexo());
-
-        if (clientes.getGdcbAtivo() == 'S') {
+        if (clientes.getGdcbAtivo().equals("S") == true) {
             jChbAtivo.setSelected(true);
         } else {
             jChbAtivo.setSelected(false);
         }
+
     }
 
     public GdcbCliente viewBean() throws ParseException {
@@ -80,12 +81,12 @@ public class JDlgCliente extends javax.swing.JDialog {
         clientes.setGdcbEscolaridade(JtxtEscolaridade.getText());
         clientes.setGdcbCursoAtual(JtxtCurso.getText());
         clientes.setGdcbSexo(jCboSexo.getSelectedItem().toString());
-
-        if (jChbAtivo.isSelected()) {
-            clientes.setGdcbAtivo('S');
+        if (jChbAtivo.isSelected() == true) {
+            clientes.setGdcbAtivo("S");
         } else {
-            clientes.setGdcbAtivo('N');
+            clientes.setGdcbAtivo("N");
         }
+
         return clientes;
     }
 
@@ -552,11 +553,11 @@ public class JDlgCliente extends javax.swing.JDialog {
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
         if (Util.pergunta("Deseja excluir ?") == true) {
             gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
-          try {
-              clientesDAO.delete(viewBean());
-          } catch (ParseException ex) {
-              Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-          }
+            try {
+                clientesDAO.delete(viewBean());
+            } catch (ParseException ex) {
+                Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 

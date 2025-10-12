@@ -3,7 +3,6 @@ package bean;
 
 
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +29,7 @@ public class GdcbProdutos  implements java.io.Serializable {
      private String gdcbClassificacaoIdade;
      private BigDecimal gdcbPreco;
      private String gdcbAutor;
-     private Set gdcbVendasProdutoses = new HashSet(0);
+
 
     public GdcbProdutos() {
     }
@@ -54,7 +53,6 @@ public class GdcbProdutos  implements java.io.Serializable {
        this.gdcbClassificacaoIdade = gdcbClassificacaoIdade;
        this.gdcbPreco = gdcbPreco;
        this.gdcbAutor = gdcbAutor;
-       this.gdcbVendasProdutoses = gdcbVendasProdutoses;
     }
    
      @Id 
@@ -138,18 +136,6 @@ public class GdcbProdutos  implements java.io.Serializable {
     public void setGdcbAutor(String gdcbAutor) {
         this.gdcbAutor = gdcbAutor;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="gdcbProdutos")
-    public Set getGdcbVendasProdutoses() {
-        return this.gdcbVendasProdutoses;
-    }
-    
-    public void setGdcbVendasProdutoses(Set gdcbVendasProdutoses) {
-        this.gdcbVendasProdutoses = gdcbVendasProdutoses;
-    }
-
-
-
 
 }
 

@@ -32,7 +32,7 @@ public class GdcbFuncionario  implements java.io.Serializable {
      private String gdcbAtivo;
      private String gdcbEmailFuncionario;
      private String gdcbCargo;
-     private Set gdcbVendas = new HashSet(0);
+   
 
     public GdcbFuncionario() {
     }
@@ -57,7 +57,6 @@ public class GdcbFuncionario  implements java.io.Serializable {
        this.gdcbAtivo = gdcbAtivo;
        this.gdcbEmailFuncionario = gdcbEmailFuncionario;
        this.gdcbCargo = gdcbCargo;
-       this.gdcbVendas = gdcbVendas;
     }
    
      @Id 
@@ -141,18 +140,6 @@ public class GdcbFuncionario  implements java.io.Serializable {
     public void setGdcbCargo(String gdcbCargo) {
         this.gdcbCargo = gdcbCargo;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="gdcbFuncionario")
-    public Set getGdcbVendas() {
-        return this.gdcbVendas;
-    }
-    
-    public void setGdcbVendas(Set gdcbVendas) {
-        this.gdcbVendas = gdcbVendas;
-    }
-
-
-
 
 }
 

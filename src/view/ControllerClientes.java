@@ -73,7 +73,7 @@ public class ControllerClientes extends AbstractTableModel {
         } else if (columnIndex == 15) {
             return clientes.getGdcbSexo();
         } else if (columnIndex == 16) {
-            return clientes.getGdcbAtivo() == 'S' ? "Ativo" : "Inativo";
+            return clientes.getGdcbAtivo();
         }
         return "";
     }

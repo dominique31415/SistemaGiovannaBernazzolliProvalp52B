@@ -45,7 +45,7 @@ public class JDlgVendas extends javax.swing.JDialog {
 
         BigDecimal valorTotal = valorUnitario.multiply(quantidade).subtract(desconto);
         item.setGdcbValorTotal(valorTotal);
-        vendas.getGdcbVendasProdutoses().add(item);
+       
 
         return vendas;
     }

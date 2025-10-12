@@ -45,6 +45,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMnuProdutos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMnuUsuarios1 = new javax.swing.JMenuItem();
         jMnuSair1 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
@@ -126,6 +127,23 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenu2.setMnemonic('m');
         jMenu2.setText("Movimentos");
 
+        jMnuUsuarios1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuUsuarios1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/glitter_1490220.png"))); // NOI18N
+        jMnuUsuarios1.setMnemonic('v');
+        jMnuUsuarios1.setText("Venda");
+        jMnuUsuarios1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMnuUsuarios1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuUsuarios1ActionPerformed(evt);
+            }
+        });
+        jMnuUsuarios1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMnuUsuarios1KeyPressed(evt);
+            }
+        });
+        jMenu2.add(jMnuUsuarios1);
+
         jMnuSair1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMnuSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/saair.JPG"))); // NOI18N
         jMnuSair1.setMnemonic('s');
@@ -187,6 +205,14 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         System.exit(0); // TODO add your handling code here:
     }//GEN-LAST:event_jMnuSair1ActionPerformed
 
+    private void jMnuUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuarios1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios1ActionPerformed
+
+    private void jMnuUsuarios1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMnuUsuarios1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios1KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -235,6 +261,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuProdutos;
     private javax.swing.JMenuItem jMnuSair1;
     private javax.swing.JMenuItem jMnuUsuarios;
+    private javax.swing.JMenuItem jMnuUsuarios1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

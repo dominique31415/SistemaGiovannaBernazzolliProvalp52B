@@ -37,7 +37,7 @@ public class GdcbVenda  implements java.io.Serializable {
      private String gdcbPeriodoVenda;
      private String gdcbAvaliacaoCliente;
      private char gdcbAtivo;
-     private Set gdcbVendasProdutoses = new HashSet(0);
+   
 
     public GdcbVenda() {
     }
@@ -59,7 +59,6 @@ public class GdcbVenda  implements java.io.Serializable {
        this.gdcbPeriodoVenda = gdcbPeriodoVenda;
        this.gdcbAvaliacaoCliente = gdcbAvaliacaoCliente;
        this.gdcbAtivo = gdcbAtivo;
-       this.gdcbVendasProdutoses = gdcbVendasProdutoses;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -143,18 +142,6 @@ public class GdcbVenda  implements java.io.Serializable {
     public void setGdcbAtivo(char gdcbAtivo) {
         this.gdcbAtivo = gdcbAtivo;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="gdcbVenda")
-    public Set getGdcbVendasProdutoses() {
-        return this.gdcbVendasProdutoses;
-    }
-    
-    public void setGdcbVendasProdutoses(Set gdcbVendasProdutoses) {
-        this.gdcbVendasProdutoses = gdcbVendasProdutoses;
-    }
-
-
-
 
 }
 

@@ -39,14 +39,14 @@ public class GdcbCliente  implements java.io.Serializable {
      private String gdcbNumeroCelular;
      private String gdcbEscolaridade;
      private String gdcbCursoAtual;
-     private char gdcbAtivo;
-     private Set gdcbVendas = new HashSet(0);
+     private String gdcbAtivo;
+ 
 
     public GdcbCliente() {
     }
 
 	
-    public GdcbCliente(int gdcbIdcliente, String gdcbNome, String gdcbCpf, String gdcbRg, String gdcbSexo, String gdcbEmail, String gdcbCep, int gdcbNumeroCasa, String gdcbBairro, String gdcbNomeRua, String gdcbCidade, String gdcbNumeroCelular, String gdcbEscolaridade, String gdcbCursoAtual, char gdcbAtivo) {
+    public GdcbCliente(int gdcbIdcliente, String gdcbNome, String gdcbCpf, String gdcbRg, String gdcbSexo, String gdcbEmail, String gdcbCep, int gdcbNumeroCasa, String gdcbBairro, String gdcbNomeRua, String gdcbCidade, String gdcbNumeroCelular, String gdcbEscolaridade, String gdcbCursoAtual, String gdcbAtivo) {
         this.gdcbIdcliente = gdcbIdcliente;
         this.gdcbNome = gdcbNome;
         this.gdcbCpf = gdcbCpf;
@@ -63,7 +63,7 @@ public class GdcbCliente  implements java.io.Serializable {
         this.gdcbCursoAtual = gdcbCursoAtual;
         this.gdcbAtivo = gdcbAtivo;
     }
-    public GdcbCliente(int gdcbIdcliente, String gdcbNome, String gdcbCpf, String gdcbRg, String gdcbSexo, Date gdcbDataNascimento, String gdcbEmail, String gdcbCep, int gdcbNumeroCasa, String gdcbBairro, String gdcbNomeRua, String gdcbCidade, String gdcbNumeroCelular, String gdcbEscolaridade, String gdcbCursoAtual, char gdcbAtivo, Set gdcbVendas) {
+    public GdcbCliente(int gdcbIdcliente, String gdcbNome, String gdcbCpf, String gdcbRg, String gdcbSexo, Date gdcbDataNascimento, String gdcbEmail, String gdcbCep, int gdcbNumeroCasa, String gdcbBairro, String gdcbNomeRua, String gdcbCidade, String gdcbNumeroCelular, String gdcbEscolaridade, String gdcbCursoAtual, String gdcbAtivo, Set gdcbVendas) {
        this.gdcbIdcliente = gdcbIdcliente;
        this.gdcbNome = gdcbNome;
        this.gdcbCpf = gdcbCpf;
@@ -80,7 +80,6 @@ public class GdcbCliente  implements java.io.Serializable {
        this.gdcbEscolaridade = gdcbEscolaridade;
        this.gdcbCursoAtual = gdcbCursoAtual;
        this.gdcbAtivo = gdcbAtivo;
-       this.gdcbVendas = gdcbVendas;
     }
    
      @Id 
@@ -237,25 +236,13 @@ public class GdcbCliente  implements java.io.Serializable {
 
     
     @Column(name="gdcb_ativo", nullable=false, length=1)
-    public char getGdcbAtivo() {
+    public String getGdcbAtivo() {
         return this.gdcbAtivo;
     }
     
-    public void setGdcbAtivo(char gdcbAtivo) {
+    public void setGdcbAtivo(String gdcbAtivo) {
         this.gdcbAtivo = gdcbAtivo;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="gdcbCliente")
-    public Set getGdcbVendas() {
-        return this.gdcbVendas;
-    }
-    
-    public void setGdcbVendas(Set gdcbVendas) {
-        this.gdcbVendas = gdcbVendas;
-    }
-
-
-
 
 }
 
