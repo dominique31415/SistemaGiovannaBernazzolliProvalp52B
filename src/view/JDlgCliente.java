@@ -1,8 +1,7 @@
 package view;
 
 import javax.swing.JOptionPane;
-import tools.UtilClientes;
-import tools.UtilUsuarios;
+import tools.Util;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,7 +21,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         initComponents();
         setTitle("gdcb_clientes");
         setLocationRelativeTo(null);
-        UtilUsuarios.habilitar(false, jFmtIdCliente, JtxtNome, JtxtBairro,
+        Util.habilitar(false, jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
@@ -447,44 +446,44 @@ public class JDlgCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        UtilUsuarios.habilitar(true, jFmtIdCliente, JtxtNome, JtxtBairro,
+        Util.habilitar(true, jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
-        UtilUsuarios.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         JOptionPane.showConfirmDialog(null, "Deseja continuar Alterar algum dado?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
-        UtilUsuarios.habilitar(false, jFmtIdCliente, JtxtNome, JtxtBairro,
+        Util.habilitar(false, jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
-        UtilUsuarios.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        int cod = UtilClientes.strToInt(jFmtIdCliente.getText());
+        int cod = Util.strToInt(jFmtIdCliente.getText());
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        UtilClientes.habilitar(false, jFmtIdCliente, JtxtNome, JtxtBairro,
+        Util.habilitar(false, jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
-        UtilClientes.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
-        UtilClientes.limpar(jFmtIdCliente, JtxtNome, JtxtBairro,
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar); // TODO add your handling code here:
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        UtilClientes.pergunta("Desja excluir??");
+        Util.pergunta("Desja excluir??");
 
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 

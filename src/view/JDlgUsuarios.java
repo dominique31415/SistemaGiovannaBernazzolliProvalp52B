@@ -7,7 +7,7 @@ package view;
 
 
 import javax.swing.JOptionPane;
-import tools.UtilUsuarios;
+import tools.Util;
 
 /*
  *
@@ -23,7 +23,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         initComponents();
         setTitle("gdcb_usuarios");
         setLocationRelativeTo(null);
-        UtilUsuarios.habilitar(false, jFmtIdUsuario, JtxtNome, JtxtApelido,
+        Util.habilitar(false, jFmtIdUsuario, JtxtNome, JtxtApelido,
                 jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
@@ -267,12 +267,12 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jPwdSenhaActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        UtilUsuarios.habilitar(false, jFmtIdUsuario, JtxtNome, JtxtApelido,
+        Util.habilitar(false, jFmtIdUsuario, JtxtNome, JtxtApelido,
                 jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
-        UtilUsuarios.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
-        UtilUsuarios.limpar(jFmtIdUsuario, JtxtNome, jCboNivel); // TODO add your handling code here:
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtIdUsuario, JtxtNome, jCboNivel); // TODO add your handling code here:
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
@@ -282,30 +282,30 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        UtilUsuarios.habilitar(true, jFmtIdUsuario, JtxtNome, JtxtApelido,
+        Util.habilitar(true, jFmtIdUsuario, JtxtNome, JtxtApelido,
                 jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
-        UtilUsuarios.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        UtilUsuarios.pergunta("Desja excluir??");
+        Util.pergunta("Desja excluir??");
 
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
 
         JOptionPane.showConfirmDialog(null, "Deseja continuar Alterar algum dado?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
-        UtilUsuarios.habilitar(false, jFmtIdUsuario, JtxtNome, JtxtApelido,
+        Util.habilitar(false, jFmtIdUsuario, JtxtNome, JtxtApelido,
                 jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
-        UtilUsuarios.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        int cod = UtilUsuarios.strToInt(jFmtIdUsuario.getText());
+        int cod = Util.strToInt(jFmtIdUsuario.getText());
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     /**

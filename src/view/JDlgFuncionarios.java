@@ -5,8 +5,7 @@
 package view;
 
 import javax.swing.JOptionPane;
-import tools.UtilFuncionario;
-import tools.UtilUsuarios;
+import tools.Util;
 
 /**
  *
@@ -22,7 +21,7 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
         initComponents();
         setTitle("gdcb_funcionarios");
         setLocationRelativeTo(null);
-        UtilUsuarios.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
+        Util.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
     }
@@ -284,12 +283,12 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jChbCLTActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        UtilFuncionario.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
+        Util.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
 
-        UtilFuncionario.habilitar(true, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
-        UtilFuncionario.limpar(jFmtIdfuncionario, JtxtNome, JtxtEmail,
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF); // TODO add your handling code here:
     }//GEN-LAST:event_jBtnCancelarActionPerformed
@@ -301,34 +300,34 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void JbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnExcluirActionPerformed
-        UtilFuncionario.habilitar(true, jFmtIdfuncionario, JtxtNome, JtxtEmail,
+        Util.habilitar(true, jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
 
-        UtilFuncionario.habilitar(false, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
 
     }//GEN-LAST:event_JbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         JOptionPane.showConfirmDialog(null, "Deseja continuar Alterar algum dado?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
-        UtilFuncionario.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
+        Util.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
 
-        UtilUsuarios.habilitar(true, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        int cod = UtilFuncionario.strToInt(jFmtIdfuncionario.getText());
+        int cod = Util.strToInt(jFmtIdfuncionario.getText());
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        UtilFuncionario.habilitar(true, jFmtIdfuncionario, JtxtNome, JtxtEmail,
+        Util.habilitar(true, jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
 
-        UtilFuncionario.habilitar(false, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     /**

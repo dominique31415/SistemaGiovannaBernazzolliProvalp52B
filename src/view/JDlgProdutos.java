@@ -5,9 +5,8 @@
 package view;
 
 import javax.swing.JOptionPane;
-import tools.UtilProdutos;
-import tools.UtilProdutos;
-import tools.UtilUsuarios;
+import tools.Util;
+
 
 /**
  *
@@ -23,7 +22,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
         initComponents();
         setTitle("gdcb_produtos");
         setLocationRelativeTo(null);
-        UtilProdutos.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+        Util.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
     }
@@ -323,11 +322,11 @@ public class JDlgProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_jCboTipoLActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        UtilProdutos.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+        Util.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
-        UtilProdutos.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
-        UtilProdutos.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro); // TODO add your handling code here:
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
@@ -340,28 +339,28 @@ public class JDlgProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        UtilProdutos.habilitar(true, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+        Util.habilitar(true, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
-        UtilProdutos.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        UtilProdutos.pergunta("Desja excluir??");
+        Util.pergunta("Desja excluir??");
 
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
 
         JOptionPane.showConfirmDialog(null, "Deseja continuar Alterar algum dado?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
-        UtilProdutos.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+        Util.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
-        UtilProdutos.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        int cod = UtilProdutos.strToInt(jFmtIdProduto.getText());
+        int cod = Util.strToInt(jFmtIdProduto.getText());
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
