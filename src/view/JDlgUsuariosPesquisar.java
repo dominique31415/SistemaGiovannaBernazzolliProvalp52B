@@ -14,13 +14,15 @@ import java.util.List;
  * @author Dominique
  */
 public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
+
     private JDlgUsuarios jDlgUsuarios;
     ControllerUsuarios controllerUsuarios;
+
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
     public JDlgUsuariosPesquisar(java.awt.Frame parent, boolean modal) {
-         super(parent, modal);
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Usuários");
@@ -31,9 +33,10 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
         jTable1.setModel(controllerUsuarios);
     }
 
-    public void setTelaAnterior( JDlgUsuarios jDlgUsuarios) {
+    public void setTelaAnterior(JDlgUsuarios jDlgUsuarios) {
         this.jDlgUsuarios = jDlgUsuarios;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,9 +104,10 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        GdcbUsuarios usuarios =  controllerUsuarios.getBean( jTable1.getSelectedRow() );
+        GdcbUsuarios usuarios = controllerUsuarios.getBean(jTable1.getSelectedRow());
         jDlgUsuarios.beanView(usuarios);
         this.setVisible(false);
+        
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**
