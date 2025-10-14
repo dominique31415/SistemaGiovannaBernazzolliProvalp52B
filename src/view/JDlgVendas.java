@@ -9,6 +9,8 @@ import bean.GdcbFuncionario;
 import bean.GdcbProdutos;
 import bean.GdcbVenda;
 import bean.GdcbVendasProdutos;
+import dao.gdcb_funcionarioDAO;
+import dao.gdcb_produtosDAO;
 import dao.gdcb_vendasDAO;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -30,12 +32,21 @@ public class JDlgVendas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        gdcb_vendasDAO vendasDAO = new gdcb_vendasDAO();
-        List lista = (List) vendasDAO.listAll();
-        for (int i = 0; i < lista.size(); i++) {
-            jCboVendedor.addItem((GdcbFuncionario) lista.get(i));
-        }
+        gdcb_funcionarioDAO funcionarioDAO = new gdcb_funcionarioDAO();
+        List listaFuncionarios = (List) funcionarioDAO.listAll();
 
+        for (int i = 0; i < listaFuncionarios.size(); i++) {
+            GdcbFuncionario func = (GdcbFuncionario) listaFuncionarios.get(i);
+            jCboVendedor.addItem(func.getGdcbNomeFuncionario()); 
+        }
+        
+        gdcb_produtosDAO gdcb_produtosDAO = new gdcb_produtosDAO();
+        List listaProdutos = (List) gdcb_produtosDAO.listAll();
+
+        for (int i = 0; i < listaProdutos.size(); i++) {
+            GdcbProdutos prod = (GdcbProdutos) listaProdutos.get(i);
+            jCboProdutos.addItem(prod.getGdcbNomeProduto()); 
+        }
     }
 
     public GdcbVenda viewBean() {
@@ -51,8 +62,8 @@ public class JDlgVendas extends javax.swing.JDialog {
         BigDecimal valorTotal = valorUnitario.multiply(quantidade).subtract(desconto);
         item.setGdcbValorTotal(valorTotal);
 
-        vendas.setProduto((GdcbProdutos) jCboProdutos.getSelectedItem());
-        vendas.setVendedor((GdcbFuncionario) jCboVendedor.getSelectedItem());
+        vendas.setGdcbProdutos((GdcbProdutos) jCboProdutos.getSelectedItem());
+        vendas.setGdcbVenda((GdcbVenda) jCboVendedor.getSelectedItem());
         return vendas;
     }
 
@@ -90,9 +101,9 @@ public class JDlgVendas extends javax.swing.JDialog {
         jTxtDesc = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTxtQuant = new javax.swing.JTextField();
-        jCboProdutos = new javax.swing.JComboBox<Clientes>();
         jLabel4 = new javax.swing.JLabel();
         jCboVendedor = new javax.swing.JComboBox<String>();
+        jCboProdutos = new javax.swing.JComboBox();
 
         jLabel7.setText("Valor unitário");
 
@@ -203,6 +214,8 @@ public class JDlgVendas extends javax.swing.JDialog {
             }
         });
 
+        jCboProdutos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -239,11 +252,14 @@ public class JDlgVendas extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jCboVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jCboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jTxtValorUni, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -279,13 +295,13 @@ public class JDlgVendas extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCboVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCboVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
@@ -317,19 +333,23 @@ public class JDlgVendas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
-        /*   // TODO add your handling code here:
+       JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+        jDlgVendasProdutos.setVisible(true); /*   // TODO add your handling code here:
          JDlgVendasProdutos jDlgGdcbVendaProdutos = new JDlgVendasProdutos(null, true);
          jDlgGdcbVendaProdutos.setVisible(true);*/
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
-        /*// TODO add your handling code here:
+         JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+        jDlgVendasProdutos.setVisible(true); /*// TODO add your handling code here:
          JDlgVendasProdutos jDlgGdcbVendaProdutos = new JDlgVendasProdutos(null, true);
          jDlgGdcbVendaProdutos.setVisible(true);*/
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
-        /*   // TODO add your handling code here:
+       if (Util.pergunta("Deseja excluir?") == true) {
+
+        }  /*   // TODO add your handling code here:
          if (Util.perguntar("Deseja excluir o produto ?")== true) {
 
          }
@@ -337,8 +357,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
-        jDlgVendasProdutos.setVisible(true);  /* Util.habilitar(true, jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF,
+       /* Util.habilitar(true, jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF,
          jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
          jBtnConfirmar, jBtnCancelar);
          Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
@@ -350,9 +369,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        if (Util.pergunta("Deseja excluir?") == true) {
-
-        } /*  if (Util.pergunta("Deseja excluir ?") == true) {
+      /*  if (Util.pergunta("Deseja excluir ?") == true) {
          gdcb_usuariosDAO usuariosDAO = new gdcb_usuariosDAO();
          try {
          usuariosDAO.delete(viewBean());
@@ -366,8 +383,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
-        jDlgVendasProdutos.setVisible(true);  /*
+          /*
          Util.habilitar(false, jFmtIdUsuario, JtxtNome, JtxtApelido,
          jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
          jChbAtivo, jBtnConfirmar, jBtnCancelar);
@@ -451,7 +467,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnIncluirProd;
     private javax.swing.JButton jBtnPesquisar1;
-    private javax.swing.JComboBox<Clientes> jCboProdutos;
+    private javax.swing.JComboBox jCboProdutos;
     private javax.swing.JComboBox<String> jCboVendedor;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -472,4 +488,6 @@ public class JDlgVendas extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtValorUni;
     private javax.swing.JButton jbtnExcluir;
     // End of variables declaration//GEN-END:variables
+
+  
 }

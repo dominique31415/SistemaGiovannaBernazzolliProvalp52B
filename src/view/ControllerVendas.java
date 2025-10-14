@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import bean.GdcbVenda;
@@ -26,7 +21,7 @@ public class ControllerVendas extends AbstractTableModel{
 
     @Override
     public int getRowCount() {
-        return lstGdcbVendas.size();
+        return lstGdcbVendas == null ? 0 : lstGdcbVendas.size();
     }
 
     @Override
@@ -38,17 +33,17 @@ public class ControllerVendas extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         GdcbVenda venda = (GdcbVenda) lstGdcbVendas.get(rowIndex);
         if (columnIndex == 0) {
-            return venda.getGdcbIdVenda();
+            return venda.getGdcbIdItemVenda();
         } else if (columnIndex == 1) {
-            return venda.getGdcbCliente() != null ? venda.getGdcbCliente().getGdcbNome() : "";
+            return venda.getGdcbProdutos() != null ? venda.getGdcbProdutos().getGdcbNomeProduto() : "";
         } else if (columnIndex == 2) {
-            return venda.getGdcbFuncionario() != null ? venda.getGdcbFuncionario().getGdcbNomeFuncionario() : "";
+            return venda.getGdcbVenda()!= null ? venda.getGdcbVenda().getGdcbVenda() : "";
         } else if (columnIndex == 3) {
-            return venda.getGdcbDataVenda();
+            return venda.getGdcbQuantidade();
         } else if (columnIndex == 4) {
             return venda.getGdcbValorTotal();
         } else if (columnIndex == 5) {
-            return venda.getGdcbAtivo() == 'S' ? "Ativa" : "Cancelada";
+            return venda.getGdcbDesconto(); 
         }
         return "";
     }
@@ -58,15 +53,15 @@ public class ControllerVendas extends AbstractTableModel{
         if (columnIndex == 0) {
             return "Código";
         } else if (columnIndex == 1) {
-            return "Cliente";
+            return "Produto:";
         } else if (columnIndex == 2) {
             return "Vendedor";
         } else if (columnIndex == 3) {
-            return "Data Venda";
+            return "Quant:";
         } else if (columnIndex == 4) {
             return "Valor Total";
         } else if (columnIndex == 5) {
-            return "Status";
+            return "Desconto"; 
         }
         return "";
     }
