@@ -582,10 +582,15 @@ public class JDlgCliente extends javax.swing.JDialog {
             gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
             try {
                 clientesDAO.delete(viewBean());
+                 Util.limpar(jFmtIdCliente, JtxtNome, JtxtBairro,
+                jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
+                JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
+                jChbAtivo, jBtnConfirmar, jBtnCancelar); // TODO add your handling code here:
             } catch (ParseException ex) {
                 Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     /**
