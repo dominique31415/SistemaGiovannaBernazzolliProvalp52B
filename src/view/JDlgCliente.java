@@ -508,6 +508,7 @@ public class JDlgCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+
         Util.habilitar(true, jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
@@ -522,19 +523,45 @@ public class JDlgCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        Util.habilitar(true, jFmtIdCliente, JtxtNome, JtxtBairro,
+                jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
+                JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
+                jChbAtivo, jBtnConfirmar, jBtnCancelar);
+
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+
+        incluir = false;
+    }//GEN-LAST:event_jBtnAlterarActionPerformed
+
+    private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
+        gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
+        GdcbCliente usuarios = null;
+        try {
+            usuarios = viewBean();
+
+            if (usuarios != null) {
+                if (incluir == true) {
+                    clientesDAO.insert(usuarios);  // CORRETO! ← Passa o objeto cliente
+                } else {
+                    clientesDAO.update(usuarios);  // CORRETO! ← Passa o objeto cliente
+                }
+            }
+
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao processar dados: " + ex.getMessage());
+        }
+
         Util.habilitar(false, jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
-
-        incluir = false;
-    }//GEN-LAST:event_jBtnAlterarActionPerformed
-
-    private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        int cod = Util.strToInt(jFmtIdCliente.getText());
-        // TODO add your handling code here:
+        Util.limpar(jFmtIdCliente, JtxtNome, JtxtBairro,
+                jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
+                JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
+                jChbAtivo, jBtnConfirmar, jBtnCancelar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
