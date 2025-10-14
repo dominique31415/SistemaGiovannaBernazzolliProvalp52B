@@ -74,7 +74,7 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
             funcionarios.setGdcbClt("N");
         }
 
-        if (jChbAtivo.isSelected()) {
+        if (jChbAtivoF.isSelected()) {
             funcionarios.setGdcbAtivo("S");
         } else {
             funcionarios.setGdcbAtivo("N");
@@ -361,6 +361,9 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
             gdcb_funcionarioDAO gdcb_funcionarioDAO = new gdcb_funcionarioDAO();
             try {
                 gdcb_funcionarioDAO.delete(viewBean());
+                Util.limpar(jFmtIdfuncionario, JtxtNome, JtxtEmail,
+                jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
+                jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
             } catch (ParseException ex) {
                 Logger.getLogger(JDlgFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -369,14 +372,15 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
     }//GEN-LAST:event_JbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        JOptionPane.showConfirmDialog(null, "Deseja continuar Alterar algum dado?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
-        Util.habilitar(false, jFmtIdfuncionario, JtxtNome, JtxtEmail,
+        Util.habilitar(true, jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
-        Util.limpar(jFmtIdfuncionario, JtxtNome, JtxtEmail,
-                jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
+        
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
+        
+
+                incluir = false;
+
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
