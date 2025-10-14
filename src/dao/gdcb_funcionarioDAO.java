@@ -2,7 +2,6 @@ package dao;
 
 import bean.GdcbCliente;
 import bean.GdcbFuncionario;
-import bean.GdcbUsuarios;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -46,7 +45,7 @@ public class gdcb_funcionarioDAO extends AbstractDAO {
     @Override
     public Object list(int codigo) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(GdcbUsuarios.class);
+        Criteria criteria = session.createCriteria(GdcbFuncionario.class);
         criteria.add(Restrictions.eq("gdcbIdfuncionario", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();

@@ -45,7 +45,7 @@ public class gdcb_clientesDAO extends AbstractDAO {
     @Override
     public Object list(int codigo) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(GdcbUsuarios.class);
+        Criteria criteria = session.createCriteria(GdcbCliente.class);
         criteria.add(Restrictions.eq("gdcbIdcliente", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();
