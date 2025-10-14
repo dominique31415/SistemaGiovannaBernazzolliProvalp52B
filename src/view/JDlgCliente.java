@@ -39,10 +39,21 @@ public class JDlgCliente extends javax.swing.JDialog {
     public void beanView(GdcbCliente clientes) {
         jFmtIdCliente.setText(Util.intToStr(clientes.getGdcbIdcliente()));
         JtxtNome.setText(clientes.getGdcbNome());
-        jFmtIdCliente.setText(Util.intToStr(clientes.getGdcbIdcliente()));
-        JtxtNome.setText(clientes.getGdcbNome());
         JtxtBairro.setText(clientes.getGdcbBairro());
-        jFmtCPF.setText(clientes.getGdcbCpf());
+
+        String cpf = clientes.getGdcbCpf();
+        if (cpf != null && !cpf.isEmpty()) {
+            cpf = cpf.replaceAll("[^0-9]", "");
+            if (cpf.length() == 11) {
+                jFmtCPF.setText(cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "."
+                        + cpf.substring(6, 9) + "-" + cpf.substring(9));
+            } else {
+                jFmtCPF.setText(cpf);
+            }
+        } else {
+            jFmtCPF.setText("");
+        }
+
         jFmtRG.setText(clientes.getGdcbRg());
         jFmtDataNascimento.setText(Util.dateToStr(clientes.getGdcbDataNascimento()));
         JtxtEmail.setText(clientes.getGdcbEmail());
@@ -54,12 +65,12 @@ public class JDlgCliente extends javax.swing.JDialog {
         JtxtEscolaridade.setText(clientes.getGdcbEscolaridade());
         JtxtCurso.setText(clientes.getGdcbCursoAtual());
         jCboSexo.setSelectedItem(clientes.getGdcbSexo());
+
         if (clientes.getGdcbAtivo().equals("S") == true) {
             jChbAtivo.setSelected(true);
         } else {
             jChbAtivo.setSelected(false);
         }
-
     }
 
     public GdcbCliente viewBean() throws ParseException {
@@ -69,7 +80,48 @@ public class JDlgCliente extends javax.swing.JDialog {
 
         clientes.setGdcbNome(JtxtNome.getText());
         clientes.setGdcbBairro(JtxtBairro.getText());
-        clientes.setGdcbCpf(jFmtCPF.getText());
+
+        String cpf = jFmtCPF.getText().replaceAll("[^0-9]", "");
+        if (cpf.length() != 11) {
+            Util.mensagem("CPF inválido! Deve conter 11 dígitos.");
+            jFmtCPF.requestFocus();
+            return null;
+        }
+
+        if (cpf.matches("(\\d)\\1{10}")) {
+            Util.mensagem("CPF inválido! Não pode ter todos os dígitos iguais.");
+            jFmtCPF.requestFocus();
+            return null;
+        }
+
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+        }
+        int resto = soma % 11;
+        int digito1 = (resto < 2) ? 0 : 11 - resto;
+
+        if (Character.getNumericValue(cpf.charAt(9)) != digito1) {
+            Util.mensagem("CPF inválido! Dígito verificador incorreto.");
+            jFmtCPF.requestFocus();
+            return null;
+        }
+
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+        }
+        resto = soma % 11;
+        int digito2 = (resto < 2) ? 0 : 11 - resto;
+
+        if (Character.getNumericValue(cpf.charAt(10)) != digito2) {
+            Util.mensagem("CPF inválido! Dígito verificador incorreto.");
+            jFmtCPF.requestFocus();
+            return null;
+        }
+
+        clientes.setGdcbCpf(cpf);
+
         clientes.setGdcbRg(jFmtRG.getText());
         clientes.setGdcbDataNascimento(Util.strToDate(jFmtDataNascimento.getText()));
         clientes.setGdcbEmail(JtxtEmail.getText());
@@ -81,6 +133,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         clientes.setGdcbEscolaridade(JtxtEscolaridade.getText());
         clientes.setGdcbCursoAtual(JtxtCurso.getText());
         clientes.setGdcbSexo(jCboSexo.getSelectedItem().toString());
+
         if (jChbAtivo.isSelected() == true) {
             clientes.setGdcbAtivo("S");
         } else {
@@ -582,15 +635,15 @@ public class JDlgCliente extends javax.swing.JDialog {
             gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
             try {
                 clientesDAO.delete(viewBean());
-                 Util.limpar(jFmtIdCliente, JtxtNome, JtxtBairro,
-                jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
-                JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar); // TODO add your handling code here:
+                Util.limpar(jFmtIdCliente, JtxtNome, JtxtBairro,
+                        jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
+                        JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
+                        jChbAtivo, jBtnConfirmar, jBtnCancelar); // TODO add your handling code here:
             } catch (ParseException ex) {
                 Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     /**

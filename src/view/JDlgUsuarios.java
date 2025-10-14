@@ -37,7 +37,21 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         jFmtIdUsuario.setText(Util.intToStr(usuarios.getGdcbIdusuarios()));
         JtxtNome.setText(usuarios.getGdcbNome());
         JtxtApelido.setText(usuarios.getGdcbApelido());
-        jFmtCPF.setText(usuarios.getGdcbCpf());
+        //jFmtCPF.setText(usuarios.getGdcbCpf());
+
+        String cpf = usuarios.getGdcbCpf();
+        if (cpf != null && !cpf.isEmpty()) {
+            cpf = cpf.replaceAll("[^0-9]", "");
+            if (cpf.length() == 11) {
+                jFmtCPF.setText(cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "."
+                        + cpf.substring(6, 9) + "-" + cpf.substring(9));
+            } else {
+                jFmtCPF.setText(cpf);
+            }
+        } else {
+            jFmtCPF.setText("");
+        }
+
         jFmtDataNascimento.setText(Util.dateToStr(usuarios.getGdcbDataNascimento()));
         jPwdSenha.setText(usuarios.getGdcbSenha());
         jCboNivel.setSelectedIndex(usuarios.getGdcbNivel());
@@ -57,7 +71,46 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
         usuarios.setGdcbNome(JtxtNome.getText());
         usuarios.setGdcbApelido(JtxtApelido.getText());
-        usuarios.setGdcbCpf(jFmtCPF.getText());
+        // usuarios.setGdcbCpf(jFmtCPF.getText());
+
+        String cpf = jFmtCPF.getText().replaceAll("[^0-9]", "");
+        if (cpf.length() != 11) {
+            Util.mensagem("CPF inválido! EPAMINONDASSS. Deve conter 11 dígitos.");
+            jFmtCPF.requestFocus();
+            return null;
+        }
+        if (cpf.matches("(\\d)\\1{10}")) {
+            Util.mensagem("CPF inválido! EPAMINONDASSS. Não pode ter todos os dígitos iguais.");
+            jFmtCPF.requestFocus();
+            return null;
+        }
+
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+        }
+        int resto = soma % 11;
+        int digito1 = (resto < 2) ? 0 : 11 - resto;
+
+        if (Character.getNumericValue(cpf.charAt(9)) != digito1) {
+            Util.mensagem("CPF inválido! Dígito verificador incorreto.");
+            jFmtCPF.requestFocus();
+            return null;
+        }
+
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+        }
+        resto = soma % 11;
+        int digito2 = (resto < 2) ? 0 : 11 - resto;
+        if (Character.getNumericValue(cpf.charAt(10)) != digito2) {
+            Util.mensagem("CPF inválido! Dígito verificador incorreto.");
+            jFmtCPF.requestFocus();
+            return null;
+        }
+
+        usuarios.setGdcbCpf(cpf);
 
         try {
             usuarios.setGdcbDataNascimento(Util.strToDate(jFmtDataNascimento.getText()));
