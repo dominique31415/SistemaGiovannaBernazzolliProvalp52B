@@ -35,7 +35,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
     }
 
     public void beanView(GdcbProdutos produtos) {
-        JlbId1.setText(Util.intToStr(produtos.getGdcbIdprodutos()));
+        jFmtIdProduto.setText(Util.intToStr(produtos.getGdcbIdprodutos()));
         JtxtNome.setText(produtos.getGdcbNomeProduto());
         JtxtMarca.setText(produtos.getGdcbMarca());
         jCboPopularidade.setSelectedItem(produtos.getGdcbPopularidade());
@@ -45,9 +45,9 @@ public class JDlgProdutos extends javax.swing.JDialog {
         JtxtAutorLivro.setText(produtos.getGdcbAutor());
     }
 
-    public GdcbProdutos viewBean() throws ParseException {
+    public GdcbProdutos viewBean(){
         GdcbProdutos produtos = new GdcbProdutos();
-        int codigo = Util.strToInt(JlbId1.getText());
+        int codigo = Util.strToInt(jFmtIdProduto.getText());
         produtos.setGdcbIdprodutos(codigo);
 
         produtos.setGdcbNomeProduto(JtxtNome.getText());
@@ -392,29 +392,42 @@ public class JDlgProdutos extends javax.swing.JDialog {
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
         if (Util.pergunta("Deseja excluir ?") == true) {
             gdcb_produtosDAO gdcb_produtosDAO = new gdcb_produtosDAO();
-            try {
-                gdcb_produtosDAO.delete(viewBean());
-            } catch (ParseException ex) {
-                Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            gdcb_produtosDAO.delete(viewBean());
         }
         Util.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        Util.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+        Util.habilitar(true, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+
+       
 
         incluir = false;
 
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        int cod = Util.strToInt(jFmtIdProduto.getText());
+        gdcb_produtosDAO produtoDAO = new gdcb_produtosDAO();
+        GdcbProdutos produto = viewBean();
+        if (incluir == true) {
+            produtoDAO.insert(produto);
+            //produtoDAO.insert( viewBean() );
+        } else {
+            produtoDAO.update(produto);
+            //produtoDAO.update( viewBean() );
+        }
 
+        Util.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+                JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
+
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+
+        Util.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+                JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void JFmtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JFmtPrecoActionPerformed
