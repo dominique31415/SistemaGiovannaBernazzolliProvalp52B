@@ -104,10 +104,9 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        GdcbUsuarios usuarios = controllerUsuarios.getBean(jTable1.getSelectedRow());
-        jDlgUsuarios.beanView(usuarios);
+        GdcbUsuarios clientes = controllerUsuarios.getBean(jTable1.getSelectedRow());
+        jDlgUsuarios.beanView(clientes);
         this.setVisible(false);
-        
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**
