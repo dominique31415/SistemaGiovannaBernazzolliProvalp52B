@@ -1,5 +1,5 @@
 package bean;
-// Generated 28 sept. 2025 19:57:38 by Hibernate Tools 4.3.1
+// Generated 14 oct. 2025 16:43:30 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -18,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="gdcb_vendas_produtos"
-    ,catalog="dominique"
+    ,catalog="db_giovanna_bernazzolli"
 )
 public class GdcbVendasProdutos  implements java.io.Serializable {
 

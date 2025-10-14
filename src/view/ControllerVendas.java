@@ -1,6 +1,7 @@
 package view;
 
 import bean.GdcbVenda;
+import bean.GdcbVendasProdutos; 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -8,20 +9,21 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Dominique
  */
-public class ControllerVendas extends AbstractTableModel{
-     private List lstGdcbVendas;
+public class ControllerVendas extends AbstractTableModel {
+    private List<GdcbVendasProdutos> lstItensVenda; 
 
-    public void setList(List lstGdcbVendas) {
-        this.lstGdcbVendas = lstGdcbVendas;
+    public void setList(List<GdcbVendasProdutos> lstItensVenda) {
+        this.lstItensVenda = lstItensVenda;
+        fireTableDataChanged();
     }
     
-    public GdcbVenda getBean(int rowIndex) {
-        return (GdcbVenda) lstGdcbVendas.get(rowIndex);
+    public GdcbVendasProdutos getBean(int rowIndex) {
+        return lstItensVenda.get(rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return lstGdcbVendas == null ? 0 : lstGdcbVendas.size();
+        return lstItensVenda == null ? 0 : lstItensVenda.size();
     }
 
     @Override
@@ -31,38 +33,69 @@ public class ControllerVendas extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        GdcbVenda venda = (GdcbVenda) lstGdcbVendas.get(rowIndex);
-        if (columnIndex == 0) {
-            return venda.getGdcbIdItemVenda();
-        } else if (columnIndex == 1) {
-            return venda.getGdcbProdutos() != null ? venda.getGdcbProdutos().getGdcbNomeProduto() : "";
-        } else if (columnIndex == 2) {
-            return venda.getGdcbVenda()!= null ? venda.getGdcbVenda().getGdcbVenda() : "";
-        } else if (columnIndex == 3) {
-            return venda.getGdcbQuantidade();
-        } else if (columnIndex == 4) {
-            return venda.getGdcbValorTotal();
-        } else if (columnIndex == 5) {
-            return venda.getGdcbDesconto(); 
+        if (lstItensVenda == null || lstItensVenda.isEmpty()) {
+            return "";
         }
-        return "";
+        
+        GdcbVendasProdutos itemVenda = lstItensVenda.get(rowIndex);
+        
+        switch (columnIndex) {
+            case 0:
+                return itemVenda.getGdcbVenda() != null ? 
+                       itemVenda.getGdcbVenda().getGdcbIdVenda() : "";
+            case 1:
+                return itemVenda.getGdcbProdutos() != null ? 
+                       itemVenda.getGdcbProdutos().getGdcbNomeProduto() : "";
+            case 2:
+                return itemVenda.getGdcbVenda() != null && 
+                       itemVenda.getGdcbVenda().getGdcbFuncionario() != null ? 
+                       itemVenda.getGdcbVenda().getGdcbFuncionario().getGdcbNomeFuncionario() : "";
+            case 3:
+                return itemVenda.getGdcbQuantidade();
+            case 4:
+                return itemVenda.getGdcbValorTotal();
+            case 5:
+                return itemVenda.getGdcbDesconto();
+            default:
+                return "";
+        }
     }
 
     @Override
     public String getColumnName(int columnIndex) {
-        if (columnIndex == 0) {
-            return "Código";
-        } else if (columnIndex == 1) {
-            return "Produto:";
-        } else if (columnIndex == 2) {
-            return "Vendedor";
-        } else if (columnIndex == 3) {
-            return "Quant:";
-        } else if (columnIndex == 4) {
-            return "Valor Total";
-        } else if (columnIndex == 5) {
-            return "Desconto"; 
+        switch (columnIndex) {
+            case 0:
+                return "Código Venda";
+            case 1:
+                return "Produto";
+            case 2:
+                return "Vendedor";
+            case 3:
+                return "Quantidade";
+            case 4:
+                return "Valor Total";
+            case 5:
+                return "Desconto";
+            default:
+                return "";
         }
-        return "";
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        switch (columnIndex) {
+            case 0:
+                return Integer.class;
+            case 1:
+            case 2:
+                return String.class;
+            case 3:
+                return Integer.class; 
+            case 4:
+            case 5:
+                return java.math.BigDecimal.class;
+            default:
+                return Object.class;
+        }
     }
 }

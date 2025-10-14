@@ -1,5 +1,5 @@
 package bean;
-// Generated 28 sept. 2025 19:57:38 by Hibernate Tools 4.3.1
+// Generated 14 oct. 2025 16:43:30 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="gdcb_cliente"
-    ,catalog="dominique"
+    ,catalog="db_giovanna_bernazzolli"
 )
 public class GdcbCliente  implements java.io.Serializable {
 
@@ -40,7 +40,6 @@ public class GdcbCliente  implements java.io.Serializable {
      private String gdcbEscolaridade;
      private String gdcbCursoAtual;
      private String gdcbAtivo;
- 
 
     public GdcbCliente() {
     }
@@ -243,6 +242,9 @@ public class GdcbCliente  implements java.io.Serializable {
     public void setGdcbAtivo(String gdcbAtivo) {
         this.gdcbAtivo = gdcbAtivo;
     }
+
+
+
 
 }
 

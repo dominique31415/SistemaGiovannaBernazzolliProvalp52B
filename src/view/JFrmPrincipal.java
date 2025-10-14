@@ -206,7 +206,8 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMnuSair1ActionPerformed
 
     private void jMnuUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuarios1ActionPerformed
-        // TODO add your handling code here:
+        JDlgVendas telaVenda = new JDlgVendas(this, true);
+        telaVenda.setVisible(true);         // TODO add your handling code here:
     }//GEN-LAST:event_jMnuUsuarios1ActionPerformed
 
     private void jMnuUsuarios1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMnuUsuarios1KeyPressed
