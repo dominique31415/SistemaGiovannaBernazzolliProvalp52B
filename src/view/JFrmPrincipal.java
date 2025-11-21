@@ -1,6 +1,11 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,17 +17,22 @@ import java.awt.Color;
  */
 public class JFrmPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFrmPrincipal
-     */
-    public JFrmPrincipal() {
-        initComponents();
-        setTitle("SistemaGiovannaBernazzolli");
-        setLocationRelativeTo(null);
-        setExtendedState(MAXIMIZED_BOTH);
-        getContentPane().setBackground(Color.black);
-
-    }
+    
+public JFrmPrincipal() {
+    initComponents();
+    setTitle("SistemaGiovannaBernazzolli");
+    setLocationRelativeTo(null);
+    setExtendedState(MAXIMIZED_BOTH);
+    
+    final ImageIcon icon = new ImageIcon(getClass().getResource("/imagem/Metallica!.png"));
+    setContentPane(new JPanel(new BorderLayout()) {
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
+        }
+    });
+    
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
