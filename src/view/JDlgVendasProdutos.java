@@ -6,13 +6,11 @@
 package view;
 
 import bean.GdcbProdutos;
-import bean.GdcbVenda;
 import bean.GdcbVendasProdutos;
 import dao.gdcb_produtosDAO;
 import dao.gdcb_vendasDAO;
 import java.util.List;
 import tools.Util;
-import view.JDlgVendas;
 
 /**
  *
@@ -160,13 +158,14 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
 
     private void jBtnOk3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk3ActionPerformed
         GdcbVendasProdutos vendaProdutos = new GdcbVendasProdutos();
-        vendaProdutos.setGdcbProdutos((GdcbProdutos) jComboBox1.getSelectedItem());
+        GdcbProdutos produtoSelecionado = (GdcbProdutos) jComboBox1.getSelectedItem();
+        vendaProdutos.setGdcbProdutos(produtoSelecionado);
         vendaProdutos.setGdcbQuantidade(Util.strToInt(jTextQuant.getText()));
         vendaProdutos.setGdcbValorUnitario(Util.strToDouble(jTextValUni.getText()));
+        double total = Util.strToInt(jTextQuant.getText()) * Util.strToDouble(jTextValUni.getText());
+        vendaProdutos.setGdcbValorTotal(total);
         jDlgVendas.controllerVendProd.addBean(vendaProdutos);
-        // TODO add your handling code here:
-        setVisible(false);
-
+        this.dispose();
     }//GEN-LAST:event_jBtnOk3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -178,17 +177,13 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         GdcbProdutos produtos = (GdcbProdutos) jComboBox1.getSelectedItem();
         jTextValUni.setText(Util.doubleToStr(produtos.getGdcbPreco()));
         int quant = Util.strToInt(jTextQuant.getText());
-        jTextTotal.setText(Util.doubleToStr(quant * produtos.getGdcbPreco()));        // TODO add your handling code here:
+        jTextTotal.setText(Util.doubleToStr(quant * produtos.getGdcbPreco()));  // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextQuantKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextQuantKeyReleased
-        if (jTextQuant.getText().isEmpty() == false) {
-            GdcbProdutos produtos = (GdcbProdutos) jComboBox1.getSelectedItem();
-            int quant = Util.strToInt(jTextQuant.getText());
-            jTextTotal.setText(Util.doubleToStr(quant * produtos.getGdcbPreco()));
-        } else {
-            Util.limpar(jTextTotal);
-        }        // TODO add your handling code here:
+       GdcbProdutos produtos = (GdcbProdutos) jComboBox1.getSelectedItem();
+    int quant = Util.strToInt(jTextQuant.getText());
+    jTextTotal.setText(Util.doubleToStr(quant * produtos.getGdcbPreco()));
     }//GEN-LAST:event_jTextQuantKeyReleased
 
     /**

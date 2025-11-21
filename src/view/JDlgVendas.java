@@ -63,7 +63,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void selecionarClienteNoCombo(GdcbCliente cliente) {
         for (int i = 0; i < jCboClientess.getItemCount(); i++) {
             GdcbCliente item = (GdcbCliente) jCboClientess.getItemAt(i);
-            if (item.getGdcbIdcliente() == cliente.getGdcbIdcliente()) { 
+            if (item.getGdcbIdcliente() == cliente.getGdcbIdcliente()) {
                 jCboClientess.setSelectedIndex(i);
                 return;
             }
@@ -74,7 +74,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void selecionarFuncionarioNoCombo(GdcbFuncionario funcionario) {
         for (int i = 0; i < jCboFuncionario.getItemCount(); i++) {
             GdcbFuncionario item = (GdcbFuncionario) jCboFuncionario.getItemAt(i);
-            if (item.getGdcbIdfuncionario() == funcionario.getGdcbIdfuncionario()) { 
+            if (item.getGdcbIdfuncionario() == funcionario.getGdcbIdfuncionario()) {
                 jCboFuncionario.setSelectedIndex(i);
                 return;
             }
@@ -83,39 +83,40 @@ public class JDlgVendas extends javax.swing.JDialog {
     }
 
     private GdcbVenda viewBean() {
-    GdcbVenda venda = new GdcbVenda();
-    if (!jTxtCodigo.getText().isEmpty()) {
-        venda.setGdcbIdVenda(Util.strToInt(jTxtCodigo.getText()));
+        GdcbVenda venda = new GdcbVenda();
+        if (!jTxtCodigo.getText().isEmpty()) {
+            venda.setGdcbIdVenda(Util.strToInt(jTxtCodigo.getText()));
+        }
+
+        try {
+            venda.setGdcbDataVenda(Util.strToDate(jTxtData.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        venda.setGdcbQuantidade(Util.strToInt(jTxtQuant.getText()));
+        venda.setGdcbValorUnitario(Util.strToDouble(jTxtValorUni.getText()));
+        venda.setGdcbValorTotal(Util.strToDouble(jTxtTotal.getText()));
+        venda.setGdcbCliente((GdcbCliente) jCboClientess.getSelectedItem());
+        venda.setGdcbFuncionario((GdcbFuncionario) jCboFuncionario.getSelectedItem());
+
+        return venda;
     }
 
-    try {
-        venda.setGdcbDataVenda(Util.strToDate(jTxtData.getText()));
-    } catch (ParseException ex) {
-        Logger.getLogger(JDlgVendas.class.getName()).log(Level.SEVERE, null, ex);
+    public void beanView(GdcbVenda venda) {
+        jTxtCodigo.setText(Util.intToStr(venda.getGdcbIdVenda()));
+        jTxtData.setText(Util.dateToStr(venda.getGdcbDataVenda()));
+        jTxtQuant.setText(Util.intToStr(venda.getGdcbQuantidade()));
+        jTxtValorUni.setText(Util.doubleToStr(venda.getGdcbValorUnitario()));
+        jTxtTotal.setText(Util.doubleToStr(venda.getGdcbValorTotal()));
+
+        selecionarClienteNoCombo(venda.getGdcbCliente());
+        selecionarFuncionarioNoCombo(venda.getGdcbFuncionario());
+
+        gdcb_VendasProdutosDAO vendasProdutosDAO = new gdcb_VendasProdutosDAO();
+        Object lista = vendasProdutosDAO.listProutos(venda);
+        controllerVendProd.setList((List) lista);
     }
-    venda.setGdcbQuantidade(Util.strToInt(jTxtQuant.getText()));
-    venda.setGdcbValorUnitario(Util.strToDouble(jTxtValorUni.getText()));
-    venda.setGdcbValorTotal(Util.strToDouble(jTxtTotal.getText()));
-    venda.setGdcbCliente((GdcbCliente) jCboClientess.getSelectedItem());
-    venda.setGdcbFuncionario((GdcbFuncionario) jCboFuncionario.getSelectedItem());
 
-    return venda;
-}
-
- public void beanView(GdcbVenda venda) {
-    jTxtCodigo.setText(Util.intToStr(venda.getGdcbIdVenda()));
-    jTxtData.setText(Util.dateToStr(venda.getGdcbDataVenda()));
-    jTxtQuant.setText(Util.intToStr(venda.getGdcbQuantidade()));
-    jTxtValorUni.setText(Util.doubleToStr(venda.getGdcbValorUnitario()));
-    jTxtTotal.setText(Util.doubleToStr(venda.getGdcbValorTotal()));
-    
-    selecionarClienteNoCombo(venda.getGdcbCliente());
-    selecionarFuncionarioNoCombo(venda.getGdcbFuncionario());
-
-    gdcb_VendasProdutosDAO vendasProdutosDAO = new gdcb_VendasProdutosDAO();
-    Object lista = vendasProdutosDAO.listProutos(venda);
-    controllerVendProd.setList((List) lista);
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,7 +152,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         jCboFuncionario = new javax.swing.JComboBox<GdcbFuncionario>();
         jCboClientess = new javax.swing.JComboBox<GdcbCliente>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jBtnExcluirProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/alphabet_16179249.png"))); // NOI18N
         jBtnExcluirProd.addActionListener(new java.awt.event.ActionListener() {
@@ -450,14 +451,18 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnConfirmar1ActionPerformed
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
-        JDlgProdutosPesquisar jDlgProdutosPesquisar = new JDlgProdutosPesquisar(null, true);
-        jDlgProdutosPesquisar.setTelaAnterior(this);
-        jDlgProdutosPesquisar.setVisible(true);
+        JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+        jDlgVendasProdutos.setTelaAnterior(this);
+        jDlgVendasProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
         JDlgVendasProdutos jDlgVendaProdutos = new JDlgVendasProdutos(null, true);
+        jDlgVendaProdutos.setTelaAnterior(this);
+
         jDlgVendaProdutos.setVisible(true);
+
+
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed

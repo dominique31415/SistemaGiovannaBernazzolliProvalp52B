@@ -137,6 +137,11 @@ public class GdcbProdutos  implements java.io.Serializable {
         this.gdcbAutor = gdcbAutor;
     }
 
+@Override
+public String toString() {
+    return getGdcbNomeProduto()!= null ? getGdcbNomeProduto() : "";
+}
+
 }
 
 
