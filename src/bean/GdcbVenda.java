@@ -35,7 +35,6 @@ public class GdcbVenda  implements java.io.Serializable {
      private Date gdcbDataVenda;
      private Double gdcbValorTotal;
      private Integer gdcbQuantidade;
-     private String gdcbAvaliacaoCliente;
      private Double gdcbValorUnitario;
 
     public GdcbVenda() {
@@ -55,7 +54,6 @@ public class GdcbVenda  implements java.io.Serializable {
        this.gdcbDataVenda = gdcbDataVenda;
        this.gdcbValorTotal = gdcbValorTotal;
        this.gdcbQuantidade = gdcbQuantidade;
-       this.gdcbAvaliacaoCliente = gdcbAvaliacaoCliente;
        this.gdcbValorUnitario = gdcbValorUnitario;
     }
    

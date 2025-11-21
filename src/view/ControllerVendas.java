@@ -1,29 +1,24 @@
 package view;
 
 import bean.GdcbVenda;
-import bean.GdcbVendasProdutos; 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author Dominique
- */
 public class ControllerVendas extends AbstractTableModel {
-    private List<GdcbVendasProdutos> lstItensVenda; 
+    private List<GdcbVenda> lstVendas; 
 
-    public void setList(List<GdcbVendasProdutos> lstItensVenda) {
-        this.lstItensVenda = lstItensVenda;
+    public void setList(List<GdcbVenda> lstVendas) {
+        this.lstVendas = lstVendas;
         fireTableDataChanged();
     }
     
-    public GdcbVendasProdutos getBean(int rowIndex) {
-        return lstItensVenda.get(rowIndex);
+    public GdcbVenda getBean(int rowIndex) {
+        return lstVendas.get(rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return lstItensVenda == null ? 0 : lstItensVenda.size();
+        return lstVendas == null ? 0 : lstVendas.size();
     }
 
     @Override
@@ -33,29 +28,27 @@ public class ControllerVendas extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if (lstItensVenda == null || lstItensVenda.isEmpty()) {
+        if (lstVendas == null || lstVendas.isEmpty()) {
             return "";
         }
         
-        GdcbVendasProdutos itemVenda = lstItensVenda.get(rowIndex);
+        GdcbVenda venda = lstVendas.get(rowIndex);
         
         switch (columnIndex) {
             case 0:
-                return itemVenda.getGdcbVenda() != null ? 
-                       itemVenda.getGdcbVenda().getGdcbIdVenda() : "";
+                return venda.getGdcbIdVenda();
             case 1:
-                return itemVenda.getGdcbProdutos() != null ? 
-                       itemVenda.getGdcbProdutos().getGdcbNomeProduto() : "";
+                return venda.getGdcbCliente() != null ? 
+                       venda.getGdcbCliente().getGdcbNome() : "";
             case 2:
-                return itemVenda.getGdcbVenda() != null && 
-                       itemVenda.getGdcbVenda().getGdcbFuncionario() != null ? 
-                       itemVenda.getGdcbVenda().getGdcbFuncionario().getGdcbNomeFuncionario() : "";
+                return venda.getGdcbFuncionario() != null ? 
+                       venda.getGdcbFuncionario().getGdcbNomeFuncionario() : "";
             case 3:
-                return itemVenda.getGdcbQuantidade();
+                return venda.getGdcbQuantidade();
             case 4:
-                return itemVenda.getGdcbValorTotal();
+                return venda.getGdcbValorTotal();
             case 5:
-                return itemVenda.getGdcbDesconto();
+                return venda.getGdcbDataVenda();
             default:
                 return "";
         }
@@ -67,7 +60,7 @@ public class ControllerVendas extends AbstractTableModel {
             case 0:
                 return "Código Venda";
             case 1:
-                return "Produto";
+                return "Cliente";
             case 2:
                 return "Vendedor";
             case 3:
@@ -75,7 +68,7 @@ public class ControllerVendas extends AbstractTableModel {
             case 4:
                 return "Valor Total";
             case 5:
-                return "Desconto";
+                return "Data Venda";
             default:
                 return "";
         }
@@ -85,15 +78,15 @@ public class ControllerVendas extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
+            case 3:
                 return Integer.class;
             case 1:
             case 2:
                 return String.class;
-            case 3:
-                return Integer.class; 
             case 4:
-            case 5:
                 return java.math.BigDecimal.class;
+            case 5:
+                return java.util.Date.class;
             default:
                 return Object.class;
         }

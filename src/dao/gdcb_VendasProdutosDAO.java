@@ -56,14 +56,14 @@ public class gdcb_VendasProdutosDAO extends AbstractDAO{
         return lista;
     }
 
-      public Object listProutos(GdcbVenda venda) {
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(GdcbVendasProdutos.class);
-        criteria.add(Restrictions.eq("venda", venda));
-        List lista = criteria.list();
-        session.getTransaction().commit();        
-        return lista;
-    }
+ public Object listProutos(GdcbVenda venda) {
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(GdcbVendasProdutos.class);
+    criteria.add(Restrictions.eq("gdcbVenda", venda)); 
+    List lista = criteria.list();
+    session.getTransaction().commit();        
+    return lista;
+}
     
     
     @Override

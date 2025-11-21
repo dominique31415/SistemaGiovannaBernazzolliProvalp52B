@@ -378,9 +378,9 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnPesquisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisar1ActionPerformed
-        JDlgProdutosPesquisar jDlgProdutosPesquisar = new JDlgProdutosPesquisar(null, true);
-        jDlgProdutosPesquisar.setTelaAnterior(this);
-        jDlgProdutosPesquisar.setVisible(true);
+        JDlgVendaPesquisar jDlgVendaPesquisar = new JDlgVendaPesquisar(null, true);
+        jDlgVendaPesquisar.setTelaAnterior(this);
+        jDlgVendaPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisar1ActionPerformed
 
     private void jBtnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar1ActionPerformed
