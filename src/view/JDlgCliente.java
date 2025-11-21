@@ -66,98 +66,104 @@ public class JDlgCliente extends javax.swing.JDialog {
         JtxtCurso.setText(clientes.getGdcbCursoAtual());
         jCboSexo.setSelectedItem(clientes.getGdcbSexo());
 
-        
+        if (clientes.getGdcbAtivo().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+
     }
 
     public GdcbCliente viewBean() throws ParseException {
-    GdcbCliente clientes = new GdcbCliente();
-    
-    try {
-        int codigo = Util.strToInt(jFmtIdCliente.getText().trim());
-        clientes.setGdcbIdcliente(codigo);
-        clientes.setGdcbNome(JtxtNome.getText().trim());
-        clientes.setGdcbBairro(JtxtBairro.getText().trim());
-        String cpf = jFmtCPF.getText().replaceAll("[^0-9]", "");
-        if (!validarCPF(cpf)) {
-            return null;
-        }
-        clientes.setGdcbCpf(cpf);
-        clientes.setGdcbRg(jFmtRG.getText().trim());
-        String dataNasc = jFmtDataNascimento.getText().trim();
-        if (!dataNasc.isEmpty()) {
-            try {
-                clientes.setGdcbDataNascimento(Util.strToDate(dataNasc));
-            } catch (ParseException e) {
-                Util.mensagem("Data de nascimento inválida! Use o formato dd/MM/yyyy.");
-                jFmtDataNascimento.requestFocus();
+        GdcbCliente clientes = new GdcbCliente();
+
+        try {
+            int codigo = Util.strToInt(jFmtIdCliente.getText().trim());
+            clientes.setGdcbIdcliente(codigo);
+            clientes.setGdcbNome(JtxtNome.getText().trim());
+            clientes.setGdcbBairro(JtxtBairro.getText().trim());
+            String cpf = jFmtCPF.getText().replaceAll("[^0-9]", "");
+            if (!validarCPF(cpf)) {
                 return null;
             }
+            clientes.setGdcbCpf(cpf);
+            clientes.setGdcbRg(jFmtRG.getText().trim());
+            String dataNasc = jFmtDataNascimento.getText().trim();
+            if (!dataNasc.isEmpty()) {
+                try {
+                    clientes.setGdcbDataNascimento(Util.strToDate(dataNasc));
+                } catch (ParseException e) {
+                    Util.mensagem("Data de nascimento inválida! Use o formato dd/MM/yyyy.");
+                    jFmtDataNascimento.requestFocus();
+                    return null;
+                }
+            }
+
+            clientes.setGdcbEmail(JtxtEmail.getText().trim());
+            clientes.setGdcbCep(jFmtCEP.getText().trim());
+            clientes.setGdcbNumeroCasa(Util.strToInt(JtxtNumeroCasa.getText().trim()));
+            clientes.setGdcbNomeRua(JtxtNomeRua.getText().trim());
+            clientes.setGdcbCidade(JtxtCidade.getText().trim());
+            clientes.setGdcbNumeroCelular(JtxtNumeroCelular.getText().trim());
+            clientes.setGdcbEscolaridade(JtxtEscolaridade.getText().trim());
+            clientes.setGdcbCursoAtual(JtxtCurso.getText().trim());
+            clientes.setGdcbAtivo(jChbAtivo.isSelected() ? "S" : "N");
+
+            if (jCboSexo.getSelectedItem() == null) {
+                Util.mensagem("Selecione o sexo!");
+                jCboSexo.requestFocus();
+                return null;
+            }
+            clientes.setGdcbSexo(jCboSexo.getSelectedItem().toString());
+
+        } catch (Exception e) {
+            Util.mensagem("Erro ao processar dados do cliente: " + e.getMessage());
+            throw e;
         }
 
-        clientes.setGdcbEmail(JtxtEmail.getText().trim());
-        clientes.setGdcbCep(jFmtCEP.getText().trim());
-        clientes.setGdcbNumeroCasa(Util.strToInt(JtxtNumeroCasa.getText().trim()));
-        clientes.setGdcbNomeRua(JtxtNomeRua.getText().trim());
-        clientes.setGdcbCidade(JtxtCidade.getText().trim());
-        clientes.setGdcbNumeroCelular(JtxtNumeroCelular.getText().trim());
-        clientes.setGdcbEscolaridade(JtxtEscolaridade.getText().trim());
-        clientes.setGdcbCursoAtual(JtxtCurso.getText().trim());
-      
-        if (jCboSexo.getSelectedItem() == null) {
-            Util.mensagem("Selecione o sexo!");
-            jCboSexo.requestFocus();
-            return null;
+        return clientes;
+    }
+
+    private boolean validarCPF(String cpf) {
+        if (cpf == null || cpf.length() != 11) {
+            Util.mensagem("CPF inválido! Deve conter 11 dígitos.");
+            jFmtCPF.requestFocus();
+            return false;
         }
-        clientes.setGdcbSexo(jCboSexo.getSelectedItem().toString());
 
-    } catch (Exception e) {
-        Util.mensagem("Erro ao processar dados do cliente: " + e.getMessage());
-        throw e;
-    }
-    
-    return clientes;
-}
+        if (cpf.matches("(\\d)\\1{10}")) {
+            Util.mensagem("CPF inválido! Não pode ter todos os dígitos iguais.");
+            jFmtCPF.requestFocus();
+            return false;
+        }
 
-private boolean validarCPF(String cpf) {
-    if (cpf == null || cpf.length() != 11) {
-        Util.mensagem("CPF inválido! Deve conter 11 dígitos.");
-        jFmtCPF.requestFocus();
-        return false;
-    }
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+        }
+        int resto = soma % 11;
+        int digito1 = (resto < 2) ? 0 : 11 - resto;
 
-    if (cpf.matches("(\\d)\\1{10}")) {
-        Util.mensagem("CPF inválido! Não pode ter todos os dígitos iguais.");
-        jFmtCPF.requestFocus();
-        return false;
-    }
+        if (Character.getNumericValue(cpf.charAt(9)) != digito1) {
+            Util.mensagem("CPF inválido! Dígito verificador incorreto.");
+            jFmtCPF.requestFocus();
+            return false;
+        }
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+        }
+        resto = soma % 11;
+        int digito2 = (resto < 2) ? 0 : 11 - resto;
 
-    int soma = 0;
-    for (int i = 0; i < 9; i++) {
-        soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
-    }
-    int resto = soma % 11;
-    int digito1 = (resto < 2) ? 0 : 11 - resto;
+        if (Character.getNumericValue(cpf.charAt(10)) != digito2) {
+            Util.mensagem("CPF inválido! Dígito verificador incorreto.");
+            jFmtCPF.requestFocus();
+            return false;
+        }
 
-    if (Character.getNumericValue(cpf.charAt(9)) != digito1) {
-        Util.mensagem("CPF inválido! Dígito verificador incorreto.");
-        jFmtCPF.requestFocus();
-        return false;
+        return true;
     }
-    soma = 0;
-    for (int i = 0; i < 10; i++) {
-        soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
-    }
-    resto = soma % 11;
-    int digito2 = (resto < 2) ? 0 : 11 - resto;
-
-    if (Character.getNumericValue(cpf.charAt(10)) != digito2) {
-        Util.mensagem("CPF inválido! Dígito verificador incorreto.");
-        jFmtCPF.requestFocus();
-        return false;
-    }
-
-    return true;
-}
 
     /**
      * This method is called from within the constructor to initialize the form.

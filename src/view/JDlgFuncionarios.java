@@ -61,9 +61,9 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
         }
 
         if (funcionarios.getGdcbAtivo().equals("S")) {
-            jChbAtivo.setSelected(true);
+            jChbAtivoF.setSelected(true);
         } else {
-            jChbAtivo.setSelected(false);
+            jChbAtivoF.setSelected(false);
         }
     }
 
