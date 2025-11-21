@@ -63,6 +63,11 @@ public class JDlgFuncionariosPesquisar extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jBtnOk.setText("OK");
@@ -101,6 +106,12 @@ public class JDlgFuncionariosPesquisar extends javax.swing.JDialog {
         jDlgFuncionarios.beanView(funcionario);
         this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+ if (evt.getClickCount() == 2) {
+            jBtnOkActionPerformed(null);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

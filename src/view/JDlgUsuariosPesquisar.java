@@ -63,6 +63,19 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jBtnOk.setText("OK");
@@ -108,6 +121,20 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
         jDlgUsuarios.beanView(clientes);
         this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyReleased
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+     // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+ if (evt.getClickCount() == 2) {
+            jBtnOkActionPerformed(null);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
