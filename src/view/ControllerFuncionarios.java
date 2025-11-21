@@ -75,6 +75,8 @@ public class ControllerFuncionarios extends AbstractTableModel {
             return "Data Nasc.";
         } else if (columnIndex == 7) {
             return "Status";
+        }else if (columnIndex == 8) {
+            return "Ativo";
         }
         return "";
     }
