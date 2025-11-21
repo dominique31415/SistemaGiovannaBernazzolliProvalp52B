@@ -2,7 +2,7 @@ package bean;
 // Generated 19 nov. 2025 22:41:02 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
+import java.lang.Double;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -28,14 +28,14 @@ public class GdcbProdutos  implements java.io.Serializable {
      private String gdcbPopularidade;
      private String gdcbTipo;
      private String gdcbClassificacaoIdade;
-     private BigDecimal gdcbPreco;
+     private Double gdcbPreco;
      private String gdcbAutor;
 
     public GdcbProdutos() {
     }
 
 	
-    public GdcbProdutos(int gdcbIdprodutos, String gdcbNomeProduto, String gdcbMarca, String gdcbPopularidade, String gdcbTipo, BigDecimal gdcbPreco, String gdcbAutor) {
+    public GdcbProdutos(int gdcbIdprodutos, String gdcbNomeProduto, String gdcbMarca, String gdcbPopularidade, String gdcbTipo, Double gdcbPreco, String gdcbAutor) {
         this.gdcbIdprodutos = gdcbIdprodutos;
         this.gdcbNomeProduto = gdcbNomeProduto;
         this.gdcbMarca = gdcbMarca;
@@ -44,7 +44,7 @@ public class GdcbProdutos  implements java.io.Serializable {
         this.gdcbPreco = gdcbPreco;
         this.gdcbAutor = gdcbAutor;
     }
-    public GdcbProdutos(int gdcbIdprodutos, String gdcbNomeProduto, String gdcbMarca, String gdcbPopularidade, String gdcbTipo, String gdcbClassificacaoIdade, BigDecimal gdcbPreco, String gdcbAutor, Set gdcbVendasProdutoses) {
+    public GdcbProdutos(int gdcbIdprodutos, String gdcbNomeProduto, String gdcbMarca, String gdcbPopularidade, String gdcbTipo, String gdcbClassificacaoIdade, Double gdcbPreco, String gdcbAutor, Set gdcbVendasProdutoses) {
        this.gdcbIdprodutos = gdcbIdprodutos;
        this.gdcbNomeProduto = gdcbNomeProduto;
        this.gdcbMarca = gdcbMarca;
@@ -119,11 +119,11 @@ public class GdcbProdutos  implements java.io.Serializable {
 
     
     @Column(name="gdcb_preco", nullable=false, precision=10)
-    public BigDecimal getGdcbPreco() {
+    public Double getGdcbPreco() {
         return this.gdcbPreco;
     }
     
-    public void setGdcbPreco(BigDecimal gdcbPreco) {
+    public void setGdcbPreco(Double gdcbPreco) {
         this.gdcbPreco = gdcbPreco;
     }
 

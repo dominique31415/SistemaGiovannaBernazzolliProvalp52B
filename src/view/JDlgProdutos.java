@@ -34,40 +34,32 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
     }
 
-    public void beanView(GdcbProdutos produtos) {
-        jFmtIdProduto.setText(Util.intToStr(produtos.getGdcbIdprodutos()));
-        JtxtNome.setText(produtos.getGdcbNomeProduto());
-        JtxtMarca.setText(produtos.getGdcbMarca());
-        jCboPopularidade.setSelectedItem(produtos.getGdcbPopularidade());
-        jCboTipoL.setSelectedItem(produtos.getGdcbTipo());
-        JtxtClassificacaoIdade.setText(produtos.getGdcbClassificacaoIdade());
-        JFmtPreco.setText(produtos.getGdcbPreco().toString());
-        JtxtAutorLivro.setText(produtos.getGdcbAutor());
-    }
+   public void beanView(GdcbProdutos produtos) {
+    jFmtIdProduto.setText(Util.intToStr(produtos.getGdcbIdprodutos()));
+    JtxtNome.setText(produtos.getGdcbNomeProduto());
+    JtxtMarca.setText(produtos.getGdcbMarca());
+    jCboPopularidade.setSelectedItem(produtos.getGdcbPopularidade());
+    jCboTipoL.setSelectedItem(produtos.getGdcbTipo());
+    JtxtClassificacaoIdade.setText(produtos.getGdcbClassificacaoIdade());
+    JFmtPreco.setText(Util.doubleToStr(produtos.getGdcbPreco()));    
+    JtxtAutorLivro.setText(produtos.getGdcbAutor());
+}
+public GdcbProdutos viewBean(){
+    GdcbProdutos produtos = new GdcbProdutos();
+    int codigo = Util.strToInt(jFmtIdProduto.getText());
+    produtos.setGdcbIdprodutos(codigo);
 
-    public GdcbProdutos viewBean(){
-        GdcbProdutos produtos = new GdcbProdutos();
-        int codigo = Util.strToInt(jFmtIdProduto.getText());
-        produtos.setGdcbIdprodutos(codigo);
-
-        produtos.setGdcbNomeProduto(JtxtNome.getText());
-        produtos.setGdcbMarca(JtxtMarca.getText());
-        produtos.setGdcbPopularidade(jCboPopularidade.getSelectedItem() != null
-                ? jCboPopularidade.getSelectedItem().toString() : "");
-        produtos.setGdcbTipo(jCboTipoL.getSelectedItem() != null
-                ? jCboTipoL.getSelectedItem().toString() : "");
-        produtos.setGdcbClassificacaoIdade(JtxtClassificacaoIdade.getText());
-        produtos.setGdcbAutor(JtxtAutorLivro.getText());
-
-        try {
-            BigDecimal preco = new BigDecimal(JFmtPreco.getText());
-            produtos.setGdcbPreco(preco);
-        } catch (NumberFormatException e) {
-            produtos.setGdcbPreco(BigDecimal.ZERO);
-        }
-
-        return produtos;
-    }
+    produtos.setGdcbNomeProduto(JtxtNome.getText());
+    produtos.setGdcbMarca(JtxtMarca.getText());
+    produtos.setGdcbPopularidade(jCboPopularidade.getSelectedItem() != null
+            ? jCboPopularidade.getSelectedItem().toString() : "");
+    produtos.setGdcbTipo(jCboTipoL.getSelectedItem() != null
+            ? jCboTipoL.getSelectedItem().toString() : "");
+    produtos.setGdcbClassificacaoIdade(JtxtClassificacaoIdade.getText());
+    produtos.setGdcbAutor(JtxtAutorLivro.getText());
+    produtos.setGdcbPreco(Util.strToDouble(JFmtPreco.getText()));
+    return produtos;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
