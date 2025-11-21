@@ -121,15 +121,6 @@ public class GdcbVenda  implements java.io.Serializable {
         this.gdcbQuantidade = gdcbQuantidade;
     }
 
-    
-    @Column(name="gdcb_avaliacaoCliente", length=100)
-    public String getGdcbAvaliacaoCliente() {
-        return this.gdcbAvaliacaoCliente;
-    }
-    
-    public void setGdcbAvaliacaoCliente(String gdcbAvaliacaoCliente) {
-        this.gdcbAvaliacaoCliente = gdcbAvaliacaoCliente;
-    }
 
     
     @Column(name="gdcb_valorUnitario", precision=10)

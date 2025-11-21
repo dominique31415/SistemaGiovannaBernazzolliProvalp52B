@@ -15,13 +15,15 @@ import tools.Util;
  * @author Dominique
  */
 public class JDlgProdutosPesquisar extends javax.swing.JDialog {
+
     private JDlgProdutos jDlgProdutos;
     ControllerProdutos controllerProdutos;
+
     /**
      * Creates new form JDlgProdutosPesquisar
      */
     public JDlgProdutosPesquisar(java.awt.Frame parent, boolean modal) {
-         super(parent, modal);
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Produtos");
@@ -32,9 +34,10 @@ public class JDlgProdutosPesquisar extends javax.swing.JDialog {
         jTable1.setModel(controllerProdutos);
     }
 
-    public void setTelaAnterior( JDlgProdutos jDlgProdutos) {
-        this.jDlgProdutos = jDlgProdutos;
+    public void setTelaAnterior(Object telaAnterior) {
+        this.jDlgProdutos = (JDlgProdutos) telaAnterior;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -55,7 +55,9 @@ public class JDlgVendas extends javax.swing.JDialog {
         controllerVendProd = new ControllerVendasProduto();
         controllerVendProd.setList(new ArrayList());
         jTable1.setModel(controllerVendProd);
-
+  Util.habilitar(false, jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
+                jCboFuncionario, jTxtTotal,
+                jBtnConfirmar1, jBtnCancelar1);
     }
 
     private GdcbVenda viewBean() {
@@ -336,7 +338,7 @@ public class JDlgVendas extends javax.swing.JDialog {
                     .addComponent(jBtnConfirmar1)
                     .addComponent(jBtnCancelar1)
                     .addComponent(jBtnPesquisar1))
-                .addGap(255, 255, 255))
+                .addContainerGap())
         );
 
         pack();
