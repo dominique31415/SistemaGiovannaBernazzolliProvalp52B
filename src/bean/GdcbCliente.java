@@ -246,7 +246,10 @@ public class GdcbCliente  implements java.io.Serializable {
     }
 
 
-
+@Override
+public String toString() {
+    return getGdcbNome() != null ? getGdcbNome() : "";
+}
 
 }
 

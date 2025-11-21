@@ -55,45 +55,67 @@ public class JDlgVendas extends javax.swing.JDialog {
         controllerVendProd = new ControllerVendasProduto();
         controllerVendProd.setList(new ArrayList());
         jTable1.setModel(controllerVendProd);
-  Util.habilitar(false, jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
+        Util.habilitar(false, jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
                 jCboFuncionario, jTxtTotal,
                 jBtnConfirmar1, jBtnCancelar1);
     }
 
+    private void selecionarClienteNoCombo(GdcbCliente cliente) {
+        for (int i = 0; i < jCboClientess.getItemCount(); i++) {
+            GdcbCliente item = (GdcbCliente) jCboClientess.getItemAt(i);
+            if (item.getGdcbIdcliente() == cliente.getGdcbIdcliente()) { 
+                jCboClientess.setSelectedIndex(i);
+                return;
+            }
+        }
+        jCboClientess.setSelectedIndex(-1);
+    }
+
+    private void selecionarFuncionarioNoCombo(GdcbFuncionario funcionario) {
+        for (int i = 0; i < jCboFuncionario.getItemCount(); i++) {
+            GdcbFuncionario item = (GdcbFuncionario) jCboFuncionario.getItemAt(i);
+            if (item.getGdcbIdfuncionario() == funcionario.getGdcbIdfuncionario()) { 
+                jCboFuncionario.setSelectedIndex(i);
+                return;
+            }
+        }
+        jCboFuncionario.setSelectedIndex(-1);
+    }
+
     private GdcbVenda viewBean() {
-        GdcbVenda venda = new GdcbVenda();
-        if (!jTxtCodigo.getText().isEmpty()) {
-            venda.setGdcbIdVenda(Util.strToInt(jTxtCodigo.getText()));
-        }
-
-        try {
-            venda.setGdcbDataVenda(Util.strToDate(jTxtData.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgVendas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        venda.setGdcbQuantidade(Util.strToInt(jTxtQuant.getText()));
-        venda.setGdcbValorUnitario(Util.strToDouble(jTxtValorUni.getText()));
-        venda.setGdcbValorTotal(Util.strToDouble(jTxtTotal.getText()));
-        venda.setGdcbCliente((GdcbCliente) jCboClientess.getSelectedItem());
-        venda.setGdcbFuncionario((GdcbFuncionario) jCboFuncionario.getSelectedItem());
-
-        return venda;
+    GdcbVenda venda = new GdcbVenda();
+    if (!jTxtCodigo.getText().isEmpty()) {
+        venda.setGdcbIdVenda(Util.strToInt(jTxtCodigo.getText()));
     }
 
-    public void beanView(GdcbVenda venda) {
-        jTxtCodigo.setText(Util.intToStr(venda.getGdcbIdVenda()));
-        jTxtData.setText(Util.dateToStr(venda.getGdcbDataVenda()));
-        jTxtQuant.setText(Util.intToStr(venda.getGdcbQuantidade()));
-        jTxtValorUni.setText(Util.doubleToStr(venda.getGdcbValorUnitario()));
-        jTxtTotal.setText(Util.doubleToStr(venda.getGdcbValorTotal()));
-        jCboClientess.setSelectedItem(venda.getGdcbCliente());
-        jCboFuncionario.setSelectedItem(venda.getGdcbFuncionario());
-
-        gdcb_VendasProdutosDAO vendasProdutosDAO = new gdcb_VendasProdutosDAO();
-        Object lista = vendasProdutosDAO.listProutos(venda);
-        controllerVendProd.setList((List) lista);
+    try {
+        venda.setGdcbDataVenda(Util.strToDate(jTxtData.getText()));
+    } catch (ParseException ex) {
+        Logger.getLogger(JDlgVendas.class.getName()).log(Level.SEVERE, null, ex);
     }
+    venda.setGdcbQuantidade(Util.strToInt(jTxtQuant.getText()));
+    venda.setGdcbValorUnitario(Util.strToDouble(jTxtValorUni.getText()));
+    venda.setGdcbValorTotal(Util.strToDouble(jTxtTotal.getText()));
+    venda.setGdcbCliente((GdcbCliente) jCboClientess.getSelectedItem());
+    venda.setGdcbFuncionario((GdcbFuncionario) jCboFuncionario.getSelectedItem());
 
+    return venda;
+}
+
+ public void beanView(GdcbVenda venda) {
+    jTxtCodigo.setText(Util.intToStr(venda.getGdcbIdVenda()));
+    jTxtData.setText(Util.dateToStr(venda.getGdcbDataVenda()));
+    jTxtQuant.setText(Util.intToStr(venda.getGdcbQuantidade()));
+    jTxtValorUni.setText(Util.doubleToStr(venda.getGdcbValorUnitario()));
+    jTxtTotal.setText(Util.doubleToStr(venda.getGdcbValorTotal()));
+    
+    selecionarClienteNoCombo(venda.getGdcbCliente());
+    selecionarFuncionarioNoCombo(venda.getGdcbFuncionario());
+
+    gdcb_VendasProdutosDAO vendasProdutosDAO = new gdcb_VendasProdutosDAO();
+    Object lista = vendasProdutosDAO.listProutos(venda);
+    controllerVendProd.setList((List) lista);
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -374,7 +396,12 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        Util.habilitar(true, jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
+                jCboFuncionario, jTxtTotal,
+                jBtnConfirmar1, jBtnCancelar1);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar1);
 
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnPesquisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisar1ActionPerformed
@@ -385,10 +412,10 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     private void jBtnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar1ActionPerformed
 
-        Util.habilitar(true, jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
+        Util.habilitar(false, jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
                 jCboFuncionario, jTxtTotal,
                 jBtnConfirmar1, jBtnCancelar1);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar1);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar1);
 
         Util.limpar(jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
                 jCboFuncionario, jTxtTotal);
@@ -405,17 +432,17 @@ public class JDlgVendas extends javax.swing.JDialog {
             vendaDAO.insert(gdcbVenda);
             for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
                 GdcbVendasProdutos gdcbVendasProdutos = controllerVendProd.getBean(ind);
-                gdcbVendasProdutos.setGdcbVenda(gdcbVenda); 
-                vendasProdutosDAO.insert(gdcbVendasProdutos); 
+                gdcbVendasProdutos.setGdcbVenda(gdcbVenda);
+                vendasProdutosDAO.insert(gdcbVendasProdutos);
             }
         } else {
             vendaDAO.update(gdcbVenda);
         }
 
-        Util.habilitar(true, jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
+        Util.habilitar(false, jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
                 jCboFuncionario, jTxtTotal,
                 jBtnConfirmar1, jBtnCancelar1);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar1);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar1);
 
         Util.limpar(jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
                 jCboFuncionario, jTxtTotal);
