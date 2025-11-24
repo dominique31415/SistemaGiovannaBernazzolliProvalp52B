@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import tools.Util;
 
 /**
@@ -379,7 +380,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        if (Util.pergunta("Deseja excluir ?") == true) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir a venda?", "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             gdcb_vendasDAO vendaDAO = new gdcb_vendasDAO();
             gdcb_VendasProdutosDAO vendasProdutosDAO = new gdcb_VendasProdutosDAO();
 
@@ -390,10 +391,9 @@ public class JDlgVendas extends javax.swing.JDialog {
 
             GdcbVenda vendaAtual = viewBean();
             vendaDAO.delete(vendaAtual);
+            Util.limpar(jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess, jCboFuncionario, jTxtTotal);
+            controllerVendProd.setList(new ArrayList<>());
         }
-        Util.limpar(jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
-                jCboFuncionario, jTxtTotal);
-        controllerVendProd.setList(new ArrayList());
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed

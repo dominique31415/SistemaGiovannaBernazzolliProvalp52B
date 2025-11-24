@@ -653,14 +653,16 @@ public class JDlgCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        if (Util.pergunta("Deseja excluir ?") == true) {
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir ?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+        if (resposta == JOptionPane.YES_OPTION) {
             gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
             try {
                 clientesDAO.delete(viewBean());
                 Util.limpar(jFmtIdCliente, JtxtNome, JtxtBairro,
                         jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                         JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
-                        jChbAtivo, jBtnConfirmar, jBtnCancelar); // TODO add your handling code here:
+                        jChbAtivo, jBtnConfirmar, jBtnCancelar);
             } catch (ParseException ex) {
                 Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }

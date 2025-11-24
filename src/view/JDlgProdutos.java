@@ -34,32 +34,33 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
     }
 
-   public void beanView(GdcbProdutos produtos) {
-    jFmtIdProduto.setText(Util.intToStr(produtos.getGdcbIdprodutos()));
-    JtxtNome.setText(produtos.getGdcbNomeProduto());
-    JtxtMarca.setText(produtos.getGdcbMarca());
-    jCboPopularidade.setSelectedItem(produtos.getGdcbPopularidade());
-    jCboTipoL.setSelectedItem(produtos.getGdcbTipo());
-    JtxtClassificacaoIdade.setText(produtos.getGdcbClassificacaoIdade());
-    JFmtPreco.setText(Util.doubleToStr(produtos.getGdcbPreco()));    
-    JtxtAutorLivro.setText(produtos.getGdcbAutor());
-}
-public GdcbProdutos viewBean(){
-    GdcbProdutos produtos = new GdcbProdutos();
-    int codigo = Util.strToInt(jFmtIdProduto.getText());
-    produtos.setGdcbIdprodutos(codigo);
+    public void beanView(GdcbProdutos produtos) {
+        jFmtIdProduto.setText(Util.intToStr(produtos.getGdcbIdprodutos()));
+        JtxtNome.setText(produtos.getGdcbNomeProduto());
+        JtxtMarca.setText(produtos.getGdcbMarca());
+        jCboPopularidade.setSelectedItem(produtos.getGdcbPopularidade());
+        jCboTipoL.setSelectedItem(produtos.getGdcbTipo());
+        JtxtClassificacaoIdade.setText(produtos.getGdcbClassificacaoIdade());
+        JFmtPreco.setText(Util.doubleToStr(produtos.getGdcbPreco()));
+        JtxtAutorLivro.setText(produtos.getGdcbAutor());
+    }
 
-    produtos.setGdcbNomeProduto(JtxtNome.getText());
-    produtos.setGdcbMarca(JtxtMarca.getText());
-    produtos.setGdcbPopularidade(jCboPopularidade.getSelectedItem() != null
-            ? jCboPopularidade.getSelectedItem().toString() : "");
-    produtos.setGdcbTipo(jCboTipoL.getSelectedItem() != null
-            ? jCboTipoL.getSelectedItem().toString() : "");
-    produtos.setGdcbClassificacaoIdade(JtxtClassificacaoIdade.getText());
-    produtos.setGdcbAutor(JtxtAutorLivro.getText());
-    produtos.setGdcbPreco(Util.strToDouble(JFmtPreco.getText()));
-    return produtos;
-}
+    public GdcbProdutos viewBean() {
+        GdcbProdutos produtos = new GdcbProdutos();
+        int codigo = Util.strToInt(jFmtIdProduto.getText());
+        produtos.setGdcbIdprodutos(codigo);
+
+        produtos.setGdcbNomeProduto(JtxtNome.getText());
+        produtos.setGdcbMarca(JtxtMarca.getText());
+        produtos.setGdcbPopularidade(jCboPopularidade.getSelectedItem() != null
+                ? jCboPopularidade.getSelectedItem().toString() : "");
+        produtos.setGdcbTipo(jCboTipoL.getSelectedItem() != null
+                ? jCboTipoL.getSelectedItem().toString() : "");
+        produtos.setGdcbClassificacaoIdade(JtxtClassificacaoIdade.getText());
+        produtos.setGdcbAutor(JtxtAutorLivro.getText());
+        produtos.setGdcbPreco(Util.strToDouble(JFmtPreco.getText()));
+        return produtos;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -382,12 +383,12 @@ public GdcbProdutos viewBean(){
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        if (Util.pergunta("Deseja excluir ?") == true) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o produto?", "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             gdcb_produtosDAO gdcb_produtosDAO = new gdcb_produtosDAO();
             gdcb_produtosDAO.delete(viewBean());
+            Util.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
+                    JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
         }
-        Util.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
-                JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -395,8 +396,6 @@ public GdcbProdutos viewBean(){
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
-
-       
 
         incluir = false;
 

@@ -409,7 +409,7 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void JbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnExcluirActionPerformed
-        if (Util.pergunta("Deseja excluir ?") == true) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir?", "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             gdcb_funcionarioDAO gdcb_funcionarioDAO = new gdcb_funcionarioDAO();
             try {
                 gdcb_funcionarioDAO.delete(viewBean());

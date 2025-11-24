@@ -9,6 +9,7 @@ import dao.gdcb_usuariosDAO;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import tools.Util;
 
 /*
@@ -391,12 +392,12 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
-        if (Util.pergunta("Deseja excluir ?") == true) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o usuário?", "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             gdcb_usuariosDAO usuariosDAO = new gdcb_usuariosDAO();
             usuariosDAO.delete(viewBean());
+            Util.limpar(jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF, jFmtDataNascimento,
+                    jPwdSenha, jCboNivel, jChbAtivo);
         }
-        Util.limpar(jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF, jFmtDataNascimento,
-                jPwdSenha, jCboNivel, jChbAtivo);
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed

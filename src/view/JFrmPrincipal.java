@@ -54,9 +54,9 @@ public JFrmPrincipal() {
         jMnuClientes = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMnuProdutos = new javax.swing.JMenuItem();
+        jMnuSair1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMnuUsuarios1 = new javax.swing.JMenuItem();
-        jMnuSair1 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -130,6 +130,17 @@ public JFrmPrincipal() {
         });
         jMenu1.add(jMnuProdutos);
 
+        jMnuSair1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/saair.JPG"))); // NOI18N
+        jMnuSair1.setMnemonic('s');
+        jMnuSair1.setText("Sair");
+        jMnuSair1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuSair1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMnuSair1);
+
         jMenuBar1.add(jMenu1);
         jMenu1.getAccessibleContext().setAccessibleDescription("");
 
@@ -153,17 +164,6 @@ public JFrmPrincipal() {
             }
         });
         jMenu2.add(jMnuUsuarios1);
-
-        jMnuSair1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        jMnuSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/saair.JPG"))); // NOI18N
-        jMnuSair1.setMnemonic('s');
-        jMnuSair1.setText("Sair");
-        jMnuSair1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuSair1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMnuSair1);
 
         jMenuBar1.add(jMenu2);
 
