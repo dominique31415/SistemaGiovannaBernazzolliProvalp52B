@@ -1,7 +1,8 @@
 package bean;
-// Generated 19 nov. 2025 22:41:02 by Hibernate Tools 4.3.1
+// Generated 24/11/2025 14:25:23 by Hibernate Tools 4.3.1
 
 
+import java.lang.Double;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="gdcb_vendas_produtos"
-    ,catalog="dominique"
+    ,catalog="db_giovanna_bernazzolli"
 )
 public class GdcbVendasProdutos  implements java.io.Serializable {
 
@@ -26,14 +27,14 @@ public class GdcbVendasProdutos  implements java.io.Serializable {
      private GdcbProdutos gdcbProdutos;
      private GdcbVenda gdcbVenda;
      private int gdcbQuantidade;
-     private double gdcbValorUnitario;
-     private double gdcbDesconto;
-     private double gdcbValorTotal;
+     private Double gdcbValorUnitario;
+     private Double gdcbDesconto;
+     private Double gdcbValorTotal;
 
     public GdcbVendasProdutos() {
     }
 
-    public GdcbVendasProdutos(GdcbProdutos gdcbProdutos, GdcbVenda gdcbVenda, int gdcbQuantidade, double gdcbValorUnitario, double gdcbDesconto, double gdcbValorTotal) {
+    public GdcbVendasProdutos(GdcbProdutos gdcbProdutos, GdcbVenda gdcbVenda, int gdcbQuantidade, Double gdcbValorUnitario, Double gdcbDesconto, Double gdcbValorTotal) {
        this.gdcbProdutos = gdcbProdutos;
        this.gdcbVenda = gdcbVenda;
        this.gdcbQuantidade = gdcbQuantidade;
@@ -86,31 +87,31 @@ public class GdcbVendasProdutos  implements java.io.Serializable {
 
     
     @Column(name="gdcb_valorUnitario", nullable=false, precision=10)
-    public double getGdcbValorUnitario() {
+    public Double getGdcbValorUnitario() {
         return this.gdcbValorUnitario;
     }
     
-    public void setGdcbValorUnitario(double gdcbValorUnitario) {
+    public void setGdcbValorUnitario(Double gdcbValorUnitario) {
         this.gdcbValorUnitario = gdcbValorUnitario;
     }
 
     
     @Column(name="gdcb_desconto", nullable=false, precision=5)
-    public double getGdcbDesconto() {
+    public Double getGdcbDesconto() {
         return this.gdcbDesconto;
     }
     
-    public void setGdcbDesconto(double gdcbDesconto) {
+    public void setGdcbDesconto(Double gdcbDesconto) {
         this.gdcbDesconto = gdcbDesconto;
     }
 
     
     @Column(name="gdcb_valorTotal", nullable=false, precision=10)
-    public double getGdcbValorTotal() {
+    public Double getGdcbValorTotal() {
         return this.gdcbValorTotal;
     }
     
-    public void setGdcbValorTotal(double gdcbValorTotal) {
+    public void setGdcbValorTotal(Double gdcbValorTotal) {
         this.gdcbValorTotal = gdcbValorTotal;
     }
 

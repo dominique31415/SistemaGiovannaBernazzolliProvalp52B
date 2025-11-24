@@ -19,6 +19,7 @@ import tools.Util;
 public class JDlgUsuarios extends javax.swing.JDialog {
 
     private boolean incluir;
+    private boolean incluirP;
 
     /**
      * Creates new form JDlgUsuarios
@@ -378,6 +379,14 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         JDlgUsuariosPesquisar jDlgUsuariosPesquisar = new JDlgUsuariosPesquisar(null, true);
         jDlgUsuariosPesquisar.setTelaAnterior(this);
         jDlgUsuariosPesquisar.setVisible(true);
+
+        if (!jFmtIdUsuario.getText().trim().isEmpty()) {
+            incluirP = true;
+            jBtnAlterar.setEnabled(true); 
+        } else {
+            incluirP = false;
+            jBtnAlterar.setEnabled(false); 
+        }
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -401,14 +410,21 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-
-        Util.habilitar(true, jFmtIdUsuario, JtxtNome, JtxtApelido,
-                jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar);
-
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
-
-        incluir = false;
+    if (!incluirP) {
+        JOptionPane.showMessageDialog(this, 
+            "ERRO: Você deve primeiro pesquisar um usuário para poder alterar!", 
+            "Atenção", 
+            JOptionPane.WARNING_MESSAGE);
+        return; 
+    }
+    
+    Util.habilitar(true,  jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF,
+                jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
+        jFmtIdUsuario.setEnabled(false);
+    Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+    incluir = false;
+    JtxtNome.requestFocus();
 
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 

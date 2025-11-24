@@ -20,6 +20,7 @@ import tools.Util;
 public class JDlgProdutos extends javax.swing.JDialog {
 
     private boolean incluir;
+    private boolean incluirP;
 
     /**
      * Creates new form JDlgProdutos
@@ -370,6 +371,13 @@ public class JDlgProdutos extends javax.swing.JDialog {
         jDlgProdutosPesquisar.setTelaAnterior(this);
         jDlgProdutosPesquisar.setVisible(true);
 
+          if (!jFmtIdProduto.getText().trim().isEmpty()) {
+            incluirP = true;
+            jBtnAlterar.setEnabled(true); 
+        } else {
+            incluirP = false;
+            jBtnAlterar.setEnabled(false); 
+        }
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -392,9 +400,19 @@ public class JDlgProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+       
+        
+           if (!incluirP) {
+            JOptionPane.showMessageDialog(this,
+                    "ERRO: Você deve primeiro pesquisar um Produto para poder alterar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         Util.habilitar(true, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
-
+        jFmtIdProduto.setEnabled(false);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
 
         incluir = false;

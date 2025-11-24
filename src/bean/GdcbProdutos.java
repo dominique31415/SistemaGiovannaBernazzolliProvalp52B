@@ -1,5 +1,5 @@
 package bean;
-// Generated 19 nov. 2025 22:41:02 by Hibernate Tools 4.3.1
+// Generated 24/11/2025 14:25:23 by Hibernate Tools 4.3.1
 
 
 import java.lang.Double;
@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="gdcb_produtos"
-    ,catalog="dominique"
+    ,catalog="db_giovanna_bernazzolli"
 )
 public class GdcbProdutos  implements java.io.Serializable {
 
@@ -137,11 +137,16 @@ public class GdcbProdutos  implements java.io.Serializable {
         this.gdcbAutor = gdcbAutor;
     }
 
+
+
+
 @Override
 public String toString() {
     return getGdcbNomeProduto()!= null ? getGdcbNomeProduto() : "";
 }
 
 }
+
+
 
 

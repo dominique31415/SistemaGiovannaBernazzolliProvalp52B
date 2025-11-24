@@ -1,5 +1,5 @@
 package bean;
-// Generated 19 nov. 2025 22:41:02 by Hibernate Tools 4.3.1
+// Generated 24/11/2025 14:25:23 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="gdcb_cliente"
-    ,catalog="dominique"
+    ,catalog="db_giovanna_bernazzolli"
 )
 public class GdcbCliente  implements java.io.Serializable {
 
@@ -40,13 +40,12 @@ public class GdcbCliente  implements java.io.Serializable {
      private String gdcbEscolaridade;
      private String gdcbCursoAtual;
      private String gdcbAtivo;
-
-
+  
     public GdcbCliente() {
     }
 
 	
-    public GdcbCliente(int gdcbIdcliente, String gdcbNome, String gdcbCpf, String gdcbRg, String gdcbSexo, String gdcbEmail, String gdcbCep, int gdcbNumeroCasa, String gdcbBairro, String gdcbNomeRua, String gdcbCidade, String gdcbNumeroCelular, String gdcbEscolaridade, String gdcbCursoAtual, String gdcbAtivo) {
+    public GdcbCliente(int gdcbIdcliente, String gdcbNome, String gdcbCpf, String gdcbRg, String gdcbSexo, String gdcbEmail, String gdcbCep, int gdcbNumeroCasa, String gdcbBairro, String gdcbNomeRua, String gdcbCidade, String gdcbNumeroCelular, String gdcbEscolaridade, String gdcbCursoAtual) {
         this.gdcbIdcliente = gdcbIdcliente;
         this.gdcbNome = gdcbNome;
         this.gdcbCpf = gdcbCpf;
@@ -61,7 +60,6 @@ public class GdcbCliente  implements java.io.Serializable {
         this.gdcbNumeroCelular = gdcbNumeroCelular;
         this.gdcbEscolaridade = gdcbEscolaridade;
         this.gdcbCursoAtual = gdcbCursoAtual;
-        this.gdcbAtivo = gdcbAtivo;
     }
     public GdcbCliente(int gdcbIdcliente, String gdcbNome, String gdcbCpf, String gdcbRg, String gdcbSexo, Date gdcbDataNascimento, String gdcbEmail, String gdcbCep, int gdcbNumeroCasa, String gdcbBairro, String gdcbNomeRua, String gdcbCidade, String gdcbNumeroCelular, String gdcbEscolaridade, String gdcbCursoAtual, String gdcbAtivo, Set gdcbVendas) {
        this.gdcbIdcliente = gdcbIdcliente;
@@ -80,7 +78,7 @@ public class GdcbCliente  implements java.io.Serializable {
        this.gdcbEscolaridade = gdcbEscolaridade;
        this.gdcbCursoAtual = gdcbCursoAtual;
        this.gdcbAtivo = gdcbAtivo;
-
+      
     }
    
      @Id 
@@ -236,7 +234,7 @@ public class GdcbCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="gdcb_ativo", nullable=false, length=1)
+    @Column(name="gdcb_ativo", length=1)
     public String getGdcbAtivo() {
         return this.gdcbAtivo;
     }
@@ -252,5 +250,4 @@ public String toString() {
 }
 
 }
-
 

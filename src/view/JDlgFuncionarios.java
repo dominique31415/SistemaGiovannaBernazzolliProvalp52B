@@ -19,6 +19,7 @@ import tools.Util;
 public class JDlgFuncionarios extends javax.swing.JDialog {
 
     private boolean incluir;
+    private boolean incluirP;
 
     /**
      * Creates new form JDlgFuncionarios
@@ -406,6 +407,14 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
         JDlgFuncionariosPesquisar jDlgFuncionariosPesquisar = new JDlgFuncionariosPesquisar(null, true);
         jDlgFuncionariosPesquisar.setTelaAnterior(this);
         jDlgFuncionariosPesquisar.setVisible(true);
+        
+          if (!jFmtIdfuncionario.getText().trim().isEmpty()) {
+            incluirP = true;
+            jBtnAlterar.setEnabled(true); 
+        } else {
+            incluirP = false;
+            jBtnAlterar.setEnabled(false); 
+        }
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void JbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnExcluirActionPerformed
@@ -424,14 +433,25 @@ public class JDlgFuncionarios extends javax.swing.JDialog {
     }//GEN-LAST:event_JbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+      
+           if (!incluirP) {
+            JOptionPane.showMessageDialog(this,
+                    "ERRO: Você deve primeiro pesquisar um Funcionário para poder alterar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         Util.habilitar(true, jFmtIdfuncionario, JtxtNome, JtxtEmail,
                 jFmtCPF, jFmtDataNascimento, jChbCLT, jCboCargo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar, jChbAtivoF);
+        jFmtIdfuncionario.setEnabled(false);
 
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, JbtnExcluir, jBtnPesquisar);
 
         incluir = false;
 
+        
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed

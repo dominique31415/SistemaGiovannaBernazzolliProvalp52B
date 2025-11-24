@@ -20,6 +20,7 @@ import tools.Util;
 public class JDlgCliente extends javax.swing.JDialog {
 
     private boolean incluir;
+    private boolean incluirP;
 
     /**
      * Creates new form JDlgGdcbClientes
@@ -580,6 +581,14 @@ public class JDlgCliente extends javax.swing.JDialog {
         JDlgClientesPesquisar jDlgClientesPesquisar = new JDlgClientesPesquisar(null, true);
         jDlgClientesPesquisar.setTelaAnterior(this);
         jDlgClientesPesquisar.setVisible(true);
+
+        if (!jFmtIdCliente.getText().trim().isEmpty()) {
+            incluirP = true;
+            jBtnAlterar.setEnabled(true);
+        } else {
+            incluirP = false;
+            jBtnAlterar.setEnabled(false);
+        }
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -598,11 +607,19 @@ public class JDlgCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        if (!incluirP) {
+            JOptionPane.showMessageDialog(this,
+                    "ERRO: Você deve primeiro pesquisar um cliente para poder alterar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Util.habilitar(true, jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
-
+        jFmtIdCliente.setEnabled(false);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
 
         incluir = false;

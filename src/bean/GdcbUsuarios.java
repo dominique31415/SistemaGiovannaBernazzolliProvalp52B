@@ -1,5 +1,5 @@
 package bean;
-// Generated 19 nov. 2025 22:41:02 by Hibernate Tools 4.3.1
+// Generated 24/11/2025 14:25:23 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="gdcb_usuarios"
-    ,catalog="dominique"
+    ,catalog="db_giovanna_bernazzolli"
 )
 public class GdcbUsuarios  implements java.io.Serializable {
 

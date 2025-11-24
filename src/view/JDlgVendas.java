@@ -29,6 +29,7 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     ControllerVendasProduto controllerVendProd;
     boolean incluir;
+    boolean incluirP;
 
     /**
      * Creates new form JDlgVendass
@@ -397,9 +398,21 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+
+
+           if (!incluirP) {
+            JOptionPane.showMessageDialog(this,
+                    "ERRO: Você deve primeiro pesquisar uma Venda para poder alterar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Util.habilitar(true, jTxtCodigo, jTxtValorUni, jTxtQuant, jTxtData, jTxtTotal, jCboClientess,
                 jCboFuncionario, jTxtTotal,
                 jBtnConfirmar1, jBtnCancelar1);
+                jTxtCodigo.setEnabled(false);
+
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar1);
 
         incluir = false;
@@ -409,6 +422,14 @@ public class JDlgVendas extends javax.swing.JDialog {
         JDlgVendaPesquisar jDlgVendaPesquisar = new JDlgVendaPesquisar(null, true);
         jDlgVendaPesquisar.setTelaAnterior(this);
         jDlgVendaPesquisar.setVisible(true);
+        
+         if (!jTxtCodigo.getText().trim().isEmpty()) {
+            incluirP = true;
+            jBtnAlterar.setEnabled(true); 
+        } else {
+            incluirP = false;
+            jBtnAlterar.setEnabled(false); 
+        }
     }//GEN-LAST:event_jBtnPesquisar1ActionPerformed
 
     private void jBtnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar1ActionPerformed

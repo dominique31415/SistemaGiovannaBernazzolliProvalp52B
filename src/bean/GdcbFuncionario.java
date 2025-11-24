@@ -1,5 +1,5 @@
 package bean;
-// Generated 19 nov. 2025 22:41:02 by Hibernate Tools 4.3.1
+// Generated 24/11/2025 14:25:23 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="gdcb_funcionario"
-    ,catalog="dominique"
+    ,catalog="db_giovanna_bernazzolli"
 )
 public class GdcbFuncionario  implements java.io.Serializable {
 
@@ -32,7 +32,6 @@ public class GdcbFuncionario  implements java.io.Serializable {
      private String gdcbAtivo;
      private String gdcbEmailFuncionario;
      private String gdcbCargo;
-
 
     public GdcbFuncionario() {
     }
@@ -57,7 +56,7 @@ public class GdcbFuncionario  implements java.io.Serializable {
        this.gdcbAtivo = gdcbAtivo;
        this.gdcbEmailFuncionario = gdcbEmailFuncionario;
        this.gdcbCargo = gdcbCargo;
- 
+      
     }
    
      @Id 
@@ -142,7 +141,6 @@ public class GdcbFuncionario  implements java.io.Serializable {
         this.gdcbCargo = gdcbCargo;
     }
 
-
 @Override
 public String toString() {
     return getGdcbNomeFuncionario() != null ? getGdcbNomeFuncionario() : "";
@@ -150,5 +148,4 @@ public String toString() {
 
 
 }
-
 
