@@ -20,18 +20,26 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     
 public JFrmPrincipal() {
     initComponents();
+   JDlgLogin telaLogin = new JDlgLogin(this, true);
+    telaLogin.setVisible(true);
+    
+    if (!telaLogin.isLoginSucedido()) {
+        System.exit(0);
+        return;
+    }
     setTitle("SistemaGiovannaBernazzolli");
     setLocationRelativeTo(null);
     setExtendedState(MAXIMIZED_BOTH);
     
     final ImageIcon icon = new ImageIcon(getClass().getResource("/imagem/Metallica!.png"));
     setContentPane(new JPanel(new BorderLayout()) {
+        @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
         }
     });
-    
+
 }
 
     /**

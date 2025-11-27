@@ -91,13 +91,7 @@ public class JDlgCliente extends javax.swing.JDialog {
             clientes.setGdcbRg(jFmtRG.getText().trim());
             String dataNasc = jFmtDataNascimento.getText().trim();
             if (!dataNasc.isEmpty()) {
-                try {
-                    clientes.setGdcbDataNascimento(Util.strToDate(dataNasc));
-                } catch (ParseException e) {
-                    Util.mensagem("Data de nascimento inválida! Use o formato dd/MM/yyyy.");
-                    jFmtDataNascimento.requestFocus();
-                    return null;
-                }
+                clientes.setGdcbDataNascimento(Util.strToDate(dataNasc));
             }
 
             clientes.setGdcbEmail(JtxtEmail.getText().trim());
@@ -300,7 +294,12 @@ public class JDlgCliente extends javax.swing.JDialog {
 
         JlbSexo.setText("Sexo");
 
-        jCboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M", " " }));
+        jCboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
+        jCboSexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCboSexoActionPerformed(evt);
+            }
+        });
 
         jFmtCEP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -377,7 +376,7 @@ public class JDlgCliente extends javax.swing.JDialog {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(JlbNumeroCelular)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(JtxtNumeroCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                            .addComponent(JtxtNumeroCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(JlbNomeRua)
@@ -455,7 +454,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JlbId)
                     .addComponent(jFmtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -602,6 +601,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         Util.limpar(jFmtIdCliente, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo, jChbAtivo);
+        jFmtIdCliente.requestFocus();
 
         incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
@@ -621,6 +621,7 @@ public class JDlgCliente extends javax.swing.JDialog {
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
         jFmtIdCliente.setEnabled(false);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        JtxtNome.requestFocus();
 
         incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
@@ -633,9 +634,9 @@ public class JDlgCliente extends javax.swing.JDialog {
 
             if (usuarios != null) {
                 if (incluir == true) {
-                    clientesDAO.insert(usuarios);  // CORRETO! ← Passa o objeto cliente
+                    clientesDAO.insert(usuarios); 
                 } else {
-                    clientesDAO.update(usuarios);  // CORRETO! ← Passa o objeto cliente
+                    clientesDAO.update(usuarios);  
                 }
             }
 
@@ -649,7 +650,7 @@ public class JDlgCliente extends javax.swing.JDialog {
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(true, jBtnIncluir, jbtnExcluir, jBtnPesquisar);
         Util.limpar(jFmtIdCliente, JtxtNome, JtxtBairro,
                 jFmtCPF, jFmtRG, jFmtDataNascimento, JtxtEmail, jFmtCEP,
                 JtxtNumeroCasa, JtxtNomeRua, JtxtCidade, JtxtNumeroCelular, JtxtEscolaridade, JtxtCurso, jCboSexo,
@@ -686,6 +687,10 @@ public class JDlgCliente extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_jbtnExcluirActionPerformed
+
+    private void jCboSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboSexoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCboSexoActionPerformed
 
     /**
      * @param args the command line arguments

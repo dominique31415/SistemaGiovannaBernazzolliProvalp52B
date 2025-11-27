@@ -114,11 +114,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
         usuarios.setGdcbCpf(cpf);
 
-        try {
-            usuarios.setGdcbDataNascimento(Util.strToDate(jFmtDataNascimento.getText()));
-        } catch (ParseException ex) {
-            usuarios.setGdcbDataNascimento(null);
-        }
+        usuarios.setGdcbDataNascimento(Util.strToDate(jFmtDataNascimento.getText()));
 
         usuarios.setGdcbSenha(jPwdSenha.getText());
         usuarios.setGdcbNivel(jCboNivel.getSelectedIndex());
@@ -271,34 +267,35 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                             .addComponent(jBtnPesquisar)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(JlbId1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFmtIdUsuario))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(JlbNome)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JtxtNome))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JlbApelido)
-                                    .addComponent(JlbCPF))
-                                .addGap(18, 18, 18)
-                                .addComponent(JtxtApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(JlbNivelEmpresa, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jFmtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jFmtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(JlbId1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jFmtIdUsuario))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(JlbNome)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(JtxtNome))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(JlbDataNascimento)
-                                        .addComponent(JlbSenha))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jPwdSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                        .addComponent(jFmtDataNascimento)))
-                                .addComponent(jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jChbAtivo, javax.swing.GroupLayout.Alignment.LEADING))))
+                                        .addComponent(JlbApelido)
+                                        .addComponent(JlbCPF))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(JtxtApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(JlbNivelEmpresa, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(JlbDataNascimento)
+                                            .addComponent(JlbSenha))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jPwdSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                            .addComponent(jFmtDataNascimento)))
+                                    .addComponent(jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jChbAtivo, javax.swing.GroupLayout.Alignment.LEADING)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -382,10 +379,10 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
         if (!jFmtIdUsuario.getText().trim().isEmpty()) {
             incluirP = true;
-            jBtnAlterar.setEnabled(true); 
+            jBtnAlterar.setEnabled(true);
         } else {
             incluirP = false;
-            jBtnAlterar.setEnabled(false); 
+            jBtnAlterar.setEnabled(false);
         }
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
@@ -396,6 +393,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
         Util.limpar(jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF, jFmtDataNascimento,
                 jPwdSenha, jCboNivel, jChbAtivo);
+        jFmtIdUsuario.requestFocus();
 
         incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
@@ -410,21 +408,21 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-    if (!incluirP) {
-        JOptionPane.showMessageDialog(this, 
-            "ERRO: Você deve primeiro pesquisar um usuário para poder alterar!", 
-            "Atenção", 
-            JOptionPane.WARNING_MESSAGE);
-        return; 
-    }
-    
-    Util.habilitar(true,  jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF,
+        if (!incluirP) {
+            JOptionPane.showMessageDialog(this,
+                    "ERRO: Você deve primeiro pesquisar um usuário para poder alterar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Util.habilitar(true, jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF,
                 jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
                 jBtnConfirmar, jBtnCancelar);
         jFmtIdUsuario.setEnabled(false);
-    Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
-    incluir = false;
-    JtxtNome.requestFocus();
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        incluir = false;
+        JtxtNome.requestFocus();
 
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -442,9 +440,11 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                 jFmtCPF, jFmtDataNascimento, jPwdSenha, jCboNivel,
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
 
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(true, jBtnIncluir, jbtnExcluir, jBtnPesquisar);
         Util.limpar(jFmtIdUsuario, JtxtNome, JtxtApelido, jFmtCPF, jFmtDataNascimento,
                 jPwdSenha, jCboNivel, jChbAtivo);
+
+
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     /**

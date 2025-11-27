@@ -46,7 +46,6 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_giovanna_bernazzolli?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">giovanna_bernazzolli</property>
     <property name="hibernate.connection.password">giovanna_bernazzolli</property>
-    <mapping class="bean.Usuarios"/>
     <mapping class="bean.GdcbProdutos"/>
     <mapping class="bean.GdcbVendasProdutos"/>
     <mapping class="bean.GdcbUsuarios"/>

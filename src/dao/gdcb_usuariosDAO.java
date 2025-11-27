@@ -64,4 +64,17 @@ public class gdcb_usuariosDAO extends AbstractDAO {
         gdcb_usuariosDAO usuariosDAO = new gdcb_usuariosDAO();
         usuariosDAO.listAll();
     }
+    
+    public Object listLogin(String username, String senha) {
+        session.beginTransaction();
+
+        Criteria criteria = session.createCriteria(GdcbUsuarios.class);
+        criteria.add(Restrictions.eq("gdcbNome", username));
+        criteria.add(Restrictions.eq("gdcbSenha", senha));
+
+        GdcbUsuarios usuario = (GdcbUsuarios) criteria.uniqueResult();
+
+        session.getTransaction().commit();
+        return usuario;
+    }
 }

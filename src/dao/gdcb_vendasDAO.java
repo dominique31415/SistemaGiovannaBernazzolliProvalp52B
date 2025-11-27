@@ -8,6 +8,9 @@ package dao;
 import bean.GdcbVenda;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -16,13 +19,23 @@ import org.hibernate.criterion.Restrictions;
  */
 public class gdcb_vendasDAO extends AbstractDAO {
     
-    @Override
-    public void insert(Object object) {
-        session.beginTransaction();
-        session.save(object);
-        session.getTransaction().commit();;
+public void insert(GdcbVenda venda) {
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    Transaction transaction = null;
+    
+    try {
+        transaction = session.beginTransaction();
+        session.save(venda); 
+        transaction.commit();
+        
+    } catch (Exception e) {
+        if (transaction != null) transaction.rollback();
+        e.printStackTrace();
+        throw e;
+    } finally {
+        session.close();
     }
-
+}
     @Override
     public void update(Object object) {
         session.beginTransaction();
@@ -64,4 +77,28 @@ public class gdcb_vendasDAO extends AbstractDAO {
         gdcb_vendasDAO gdcb_vendasDAO = new gdcb_vendasDAO();
         gdcb_vendasDAO.listAll();
     }
+
+    @Override
+    public void insert(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+    
+    public GdcbVenda findById(Integer id) {
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    try {
+        session.beginTransaction();
+        GdcbVenda venda = (GdcbVenda) session.get(GdcbVenda.class, id);
+      
+        if (venda != null) {
+            Hibernate.initialize(venda.getGdcbVendasProdutos());
+        }
+        session.getTransaction().commit();
+        return venda;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    } finally {
+        session.close();
+    }
+}
 }

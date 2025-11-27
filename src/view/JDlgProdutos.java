@@ -84,9 +84,9 @@ public class JDlgProdutos extends javax.swing.JDialog {
         JlbNome = new javax.swing.JLabel();
         JlbPreco = new javax.swing.JLabel();
         JlbPopularidade = new javax.swing.JLabel();
-        jCboPopularidade = new javax.swing.JComboBox<String>();
+        jCboPopularidade = new javax.swing.JComboBox<>();
         JlbTipoL = new javax.swing.JLabel();
-        jCboTipoL = new javax.swing.JComboBox<String>();
+        jCboTipoL = new javax.swing.JComboBox<>();
         jBtnCancelar = new javax.swing.JButton();
         jBtnPesquisar = new javax.swing.JButton();
         jBtnIncluir = new javax.swing.JButton();
@@ -137,7 +137,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
         JlbPopularidade.setText("Popularidade");
 
-        jCboPopularidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alta", "Mediana", "Baixa", " " }));
+        jCboPopularidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alta", "Mediana", "Baixa", " " }));
         jCboPopularidade.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCboPopularidadeItemStateChanged(evt);
@@ -151,7 +151,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
         JlbTipoL.setText("Tipo");
 
-        jCboTipoL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fantasia ", "Romance", "Terror", "Distopia", "Ficção Cinetifica ", "Academicos ", "Clássico", "Mistério", "Suspense", "Outro", " " }));
+        jCboTipoL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fantasia ", "Romance", "Terror", "Distopia", "Ficção Cinetifica ", "Academicos ", "Clássico", "Mistério", "Suspense", "Outro", " " }));
         jCboTipoL.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCboTipoLItemStateChanged(evt);
@@ -234,7 +234,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(JlbMarca)
                             .addGap(18, 18, 18)
-                            .addComponent(JtxtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(JtxtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(JlbPopularidade)
                         .addGap(18, 18, 18)
@@ -270,8 +270,8 @@ public class JDlgProdutos extends javax.swing.JDialog {
                             .addComponent(JlbPreco))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JtxtAutorLivro, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                            .addComponent(JFmtPreco))))
+                            .addComponent(JFmtPreco, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                            .addComponent(JtxtAutorLivro))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -387,6 +387,9 @@ public class JDlgProdutos extends javax.swing.JDialog {
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
         Util.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro); // TODO add your handling code here:
+       
+                jFmtIdProduto.requestFocus();
+
         incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
@@ -414,6 +417,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
         jFmtIdProduto.setEnabled(false);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+                JtxtNome.requestFocus();
 
         incluir = false;
 
@@ -433,7 +437,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
         Util.habilitar(false, jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);
 
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jbtnExcluir, jBtnPesquisar);
+        Util.habilitar(true, jBtnIncluir, jbtnExcluir, jBtnPesquisar);
 
         Util.limpar(jFmtIdProduto, JFmtPreco, JtxtNome, JtxtMarca,
                 JtxtClassificacaoIdade, jCboTipoL, jCboPopularidade, jBtnConfirmar, jBtnCancelar, JtxtAutorLivro);

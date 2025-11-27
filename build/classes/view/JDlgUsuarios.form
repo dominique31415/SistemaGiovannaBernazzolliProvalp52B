@@ -44,42 +44,44 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="JlbId1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jFmtIdUsuario" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="JlbNome" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="JtxtNome" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="JlbApelido" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JlbCPF" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jFmtCPF" alignment="1" min="-2" pref="242" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="JlbId1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jFmtIdUsuario" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="JtxtApelido" min="-2" pref="235" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="JlbNivelEmpresa" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="jFmtCPF" alignment="1" min="-2" pref="235" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="JlbNome" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="JtxtNome" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="JlbDataNascimento" min="-2" max="-2" attributes="0"/>
-                                      <Component id="JlbSenha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="JlbApelido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="JlbCPF" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jPwdSenha" alignment="0" pref="175" max="32767" attributes="0"/>
-                                      <Component id="jFmtDataNascimento" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="JtxtApelido" min="-2" pref="235" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jCboNivel" alignment="1" min="-2" pref="175" max="-2" attributes="0"/>
+                              <Component id="JlbNivelEmpresa" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="JlbDataNascimento" min="-2" max="-2" attributes="0"/>
+                                          <Component id="JlbSenha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jPwdSenha" alignment="0" pref="175" max="32767" attributes="0"/>
+                                          <Component id="jFmtDataNascimento" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jCboNivel" alignment="1" min="-2" pref="175" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jChbAtivo" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jChbAtivo" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
