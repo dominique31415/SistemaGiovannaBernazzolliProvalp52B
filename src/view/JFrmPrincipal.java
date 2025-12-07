@@ -65,6 +65,8 @@ public JFrmPrincipal() {
         jMnuSair1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMnuUsuarios1 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMnuUsuarios2 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -175,17 +177,40 @@ public JFrmPrincipal() {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/necromancer.png"))); // NOI18N
+        jMenu5.setMnemonic('m');
+        jMenu5.setText("Consultas");
+
+        jMnuUsuarios2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMnuUsuarios2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/glitter_1490220.png"))); // NOI18N
+        jMnuUsuarios2.setMnemonic('v');
+        jMnuUsuarios2.setText("Consultas Produtos");
+        jMnuUsuarios2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMnuUsuarios2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuUsuarios2ActionPerformed(evt);
+            }
+        });
+        jMnuUsuarios2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMnuUsuarios2KeyPressed(evt);
+            }
+        });
+        jMenu5.add(jMnuUsuarios2);
+
+        jMenuBar1.add(jMenu5);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
+            .addGap(0, 504, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 207, Short.MAX_VALUE)
+            .addGap(0, 643, Short.MAX_VALUE)
         );
 
         pack();
@@ -232,6 +257,15 @@ public JFrmPrincipal() {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMnuUsuarios1KeyPressed
 
+    private void jMnuUsuarios2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuarios2ActionPerformed
+         JDlgConsultaProdutos telaConsulta = new JDlgConsultaProdutos(this, true);
+        telaConsulta.setVisible(true);                 // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios2ActionPerformed
+
+    private void jMnuUsuarios2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMnuUsuarios2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios2KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -272,6 +306,7 @@ public JFrmPrincipal() {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
@@ -281,6 +316,7 @@ public JFrmPrincipal() {
     private javax.swing.JMenuItem jMnuSair1;
     private javax.swing.JMenuItem jMnuUsuarios;
     private javax.swing.JMenuItem jMnuUsuarios1;
+    private javax.swing.JMenuItem jMnuUsuarios2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

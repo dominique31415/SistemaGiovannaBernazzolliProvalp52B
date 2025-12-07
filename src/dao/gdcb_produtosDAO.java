@@ -50,6 +50,33 @@ public class gdcb_produtosDAO extends AbstractDAO {
         session.getTransaction().commit();
         return lista;
     }
+    public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GdcbProdutos.class);
+        criteria.add(Restrictions.like("gdcbNomeProduto", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public Object listValor(double gdcbPreco) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GdcbProdutos.class);
+        criteria.add(Restrictions.ge("gdcbPreco",  gdcbPreco ));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public Object listNomeValor(String nome, double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GdcbProdutos.class);
+        criteria.add(Restrictions.like("gdcbNomeProduto", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("gdcbPreco",  valor ));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
 
     @Override
     public Object listAll() {
