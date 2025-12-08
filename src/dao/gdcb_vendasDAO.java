@@ -1,17 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import bean.GdcbVenda;
+import bean.GdcbCliente;
+import bean.GdcbFuncionario;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.MatchMode;
 
 /**
  *
@@ -19,13 +17,14 @@ import org.hibernate.criterion.Restrictions;
  */
 public class gdcb_vendasDAO extends AbstractDAO {
 
-    public void insert(GdcbVenda venda) {
+    @Override
+    public void insert(Object object) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
 
         try {
             transaction = session.beginTransaction();
-            session.save(venda);
+            session.save(object);
             transaction.commit();
 
         } catch (Exception e) {
@@ -76,19 +75,29 @@ public class gdcb_vendasDAO extends AbstractDAO {
         return lista;
     }
 
+    // CORRIGIDO: Usando join com cliente
     public Object listNomeCliente(String nomeC) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(GdcbVenda.class);
-        criteria.add(Restrictions.like("gdcbCliente", "%" + nomeC + "%"));
+        
+        // Fazendo join com a tabela de clientes
+        criteria.createAlias("gdcbCliente", "cliente");
+        criteria.add(Restrictions.like("cliente.gdcbNome", "%" + nomeC + "%"));
+        
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
 
+    // CORRIGIDO: Usando join com funcionário
     public Object listNomeFuncionario(String nomeF) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(GdcbVenda.class);
-        criteria.add(Restrictions.like("gdcbFuncionario", "%" + nomeF + "%"));
+        
+        // Fazendo join com a tabela de funcionários
+        criteria.createAlias("gdcbFuncionario", "funcionario");
+        criteria.add(Restrictions.like("funcionario.gdcbNome", "%" + nomeF + "%"));
+        
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -103,12 +112,65 @@ public class gdcb_vendasDAO extends AbstractDAO {
         return lista;
     }
 
+    // CORRIGIDO: Usando joins para cliente e funcionário
     public Object listNomeCFValor(String nomeC, String nomeF, double gdcbValorTotal) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(GdcbVenda.class);
-        criteria.add(Restrictions.like("gdcbCliente", "%" + nomeC + "%"));
-        criteria.add(Restrictions.like("gdcbFuncionario", "%" + nomeF + "%"));
+        
+        // Joins com cliente e funcionário
+        criteria.createAlias("gdcbCliente", "cliente");
+        criteria.createAlias("gdcbFuncionario", "funcionario");
+        
+        criteria.add(Restrictions.like("cliente.gdcbNome", "%" + nomeC + "%"));
+        criteria.add(Restrictions.like("funcionario.gdcbNome", "%" + nomeF + "%"));
         criteria.add(Restrictions.ge("gdcbValorTotal", gdcbValorTotal));
+        
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    // NOVO: Método para cliente E funcionário (sem valor)
+    public Object listNomeClienteFuncionario(String nomeC, String nomeF) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GdcbVenda.class);
+        
+        criteria.createAlias("gdcbCliente", "cliente");
+        criteria.createAlias("gdcbFuncionario", "funcionario");
+        
+        criteria.add(Restrictions.like("cliente.gdcbNome", "%" + nomeC + "%"));
+        criteria.add(Restrictions.like("funcionario.gdcbNome", "%" + nomeF + "%"));
+        
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    // NOVO: Método para cliente E valor (sem funcionário)
+    public Object listNomeClienteValor(String nomeC, double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GdcbVenda.class);
+        
+        criteria.createAlias("gdcbCliente", "cliente");
+        
+        criteria.add(Restrictions.like("cliente.gdcbNome", "%" + nomeC + "%"));
+        criteria.add(Restrictions.ge("gdcbValorTotal", valor));
+        
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    // NOVO: Método para funcionário E valor (sem cliente)
+    public Object listNomeFuncionarioValor(String nomeF, double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GdcbVenda.class);
+        
+        criteria.createAlias("gdcbFuncionario", "funcionario");
+        
+        criteria.add(Restrictions.like("funcionario.gdcbNome", "%" + nomeF + "%"));
+        criteria.add(Restrictions.ge("gdcbValorTotal", valor));
+        
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -117,11 +179,6 @@ public class gdcb_vendasDAO extends AbstractDAO {
     public static void main(String[] args) {
         gdcb_vendasDAO gdcb_vendasDAO = new gdcb_vendasDAO();
         gdcb_vendasDAO.listAll();
-    }
-
-    @Override
-    public void insert(Object object) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public GdcbVenda findById(Integer id) {

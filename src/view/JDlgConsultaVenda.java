@@ -4,9 +4,11 @@
  */
 package view;
 
+import bean.GdcbVenda;
 import dao.gdcb_vendasDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import tools.Util;
 
 /**
@@ -20,7 +22,6 @@ public class JDlgConsultaVenda extends javax.swing.JDialog {
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
-
     public JDlgConsultaVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,7 +34,7 @@ public class JDlgConsultaVenda extends javax.swing.JDialog {
         controllerConsultasVendas.setList(lista);
         jTable1.setModel(controllerConsultasVendas);
 
-    //    controllerUsuarios = new ControllerUsuarios();
+        //    controllerUsuarios = new ControllerUsuarios();
         //    UsuariosDAO usuariosDAO = new UsuariosDAO();
         //    List lista = (List) usuariosDAO.listAll();
         //    controllerUsuarios.setList(lista);
@@ -171,36 +172,33 @@ public class JDlgConsultaVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-        gdcb_vendasDAO vendasDAO = new gdcb_vendasDAO();
-        List lista;
-
         String nome = jTxtNome.getText().trim();
         String nomeF = jTxtNomeF.getText().trim();
         String valorTexto = jTxtValor.getText().trim();
 
-        if (!nome.isEmpty() && !nomeF.isEmpty() && !valorTexto.isEmpty()) {
-            double valor = Double.parseDouble(valorTexto.replace(",", "."));
-            lista = (List) vendasDAO.listNomeCFValor(nome, nomeF, valor);
-        } 
-        else if (!nome.isEmpty() && nomeF.isEmpty() && valorTexto.isEmpty()) {
-            lista = (List) vendasDAO.listNomeCliente(nome);
-        } 
-        else if (nome.isEmpty() && !nomeF.isEmpty() && valorTexto.isEmpty()) {
-            lista = (List) vendasDAO.listNomeFuncionario(nomeF);
-        } 
-        else if (nome.isEmpty() && nomeF.isEmpty() && !valorTexto.isEmpty()) {
-            double valor = Double.parseDouble(valorTexto.replace(",", "."));
-            lista = (List) vendasDAO.listValor(valor);
-        }
-        else if (!nome.isEmpty() && !nomeF.isEmpty() && valorTexto.isEmpty()) {
-            lista = (List) vendasDAO.listAll();
-        } 
-        else {
-            lista = (List) vendasDAO.listAll();
-        }
+        gdcb_vendasDAO vendasDAO = new gdcb_vendasDAO();
+        List<GdcbVenda> lista;
 
-        controllerConsultasVendas.setList(lista);
+        try {
+            if (!nome.isEmpty() && !nomeF.isEmpty() && !valorTexto.isEmpty()) {
+                double valor = Double.parseDouble(valorTexto.replace(",", "."));
+                lista = (List<GdcbVenda>) vendasDAO.listNomeCFValor(nome, nomeF, valor);
+            } else if (!nome.isEmpty() && nomeF.isEmpty() && valorTexto.isEmpty()) {
+                lista = (List<GdcbVenda>) vendasDAO.listNomeCliente(nome);
+            } else if (nome.isEmpty() && !nomeF.isEmpty() && valorTexto.isEmpty()) {
+                lista = (List<GdcbVenda>) vendasDAO.listNomeFuncionario(nomeF);
+            } else if (nome.isEmpty() && nomeF.isEmpty() && !valorTexto.isEmpty()) {
+                double valor = Double.parseDouble(valorTexto.replace(",", "."));
+                lista = (List<GdcbVenda>) vendasDAO.listValor(valor);
+            } else {
+                lista = (List<GdcbVenda>) vendasDAO.listAll();
+            }
 
+            controllerConsultasVendas.setList(lista);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Valor inválido!");
+        }
     }//GEN-LAST:event_jBtnConsultarActionPerformed
 
     /**
