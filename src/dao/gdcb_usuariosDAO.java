@@ -1,6 +1,7 @@
 package dao;
 
 import bean.GdcbUsuarios;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -59,7 +60,33 @@ public class gdcb_usuariosDAO extends AbstractDAO {
         session.getTransaction().commit();
         return lista;
     }
+ public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GdcbUsuarios.class);
+        criteria.add(Restrictions.like("gdcbNome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
 
+    public Object listData(Date gdcbDataNascimento) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GdcbUsuarios.class);
+        criteria.add(Restrictions.ge("gdcbDataNascimento",  gdcbDataNascimento ));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public Object listNomeData(String nome, Date gdcbDataNascimento ) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GdcbUsuarios.class);
+        criteria.add(Restrictions.like("gdcbNome", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("gdcbDataNascimento",  gdcbDataNascimento ));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
     public static void main(String[] args) {
         gdcb_usuariosDAO usuariosDAO = new gdcb_usuariosDAO();
         usuariosDAO.listAll();

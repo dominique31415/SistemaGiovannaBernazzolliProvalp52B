@@ -17,30 +17,29 @@ import javax.swing.JPanel;
  */
 public class JFrmPrincipal extends javax.swing.JFrame {
 
-    
-public JFrmPrincipal() {
-    initComponents();
-   JDlgLogin telaLogin = new JDlgLogin(this, true);
-    telaLogin.setVisible(true);
-    
-    if (!telaLogin.isLoginSucedido()) {
-        System.exit(0);
-        return;
-    }
-    setTitle("SistemaGiovannaBernazzolli");
-    setLocationRelativeTo(null);
-    setExtendedState(MAXIMIZED_BOTH);
-    
-    final ImageIcon icon = new ImageIcon(getClass().getResource("/imagem/Metallica!.png"));
-    setContentPane(new JPanel(new BorderLayout()) {
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
-        }
-    });
+    public JFrmPrincipal() {
+        initComponents();
+        JDlgLogin telaLogin = new JDlgLogin(this, true);
+        telaLogin.setVisible(true);
 
-}
+        if (!telaLogin.isLoginSucedido()) {
+            System.exit(0);
+            return;
+        }
+        setTitle("SistemaGiovannaBernazzolli");
+        setLocationRelativeTo(null);
+        setExtendedState(MAXIMIZED_BOTH);
+
+        final ImageIcon icon = new ImageIcon(getClass().getResource("/imagem/Metallica!.png"));
+        setContentPane(new JPanel(new BorderLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        });
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +55,10 @@ public JFrmPrincipal() {
         jMenu4 = new javax.swing.JMenu();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jToolBar1 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMnuUsuarios = new javax.swing.JMenuItem();
@@ -67,6 +70,9 @@ public JFrmPrincipal() {
         jMnuUsuarios1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMnuUsuarios2 = new javax.swing.JMenuItem();
+        jMnuUsuarios3 = new javax.swing.JMenuItem();
+        jMnuUsuarios4 = new javax.swing.JMenuItem();
+        jMnuUsuarios5 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -80,6 +86,35 @@ public JFrmPrincipal() {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jToolBar1.setRollover(true);
+
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/sorciere.png"))); // NOI18N
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton2);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/nuit.png"))); // NOI18N
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton3);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/cadastro.JPG"))); // NOI18N
         jMenu1.setMnemonic('C');
@@ -182,7 +217,7 @@ public JFrmPrincipal() {
         jMenu5.setText("Consultas");
 
         jMnuUsuarios2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMnuUsuarios2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/glitter_1490220.png"))); // NOI18N
+        jMnuUsuarios2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/ram.png"))); // NOI18N
         jMnuUsuarios2.setMnemonic('v');
         jMnuUsuarios2.setText("Consultas Produtos");
         jMnuUsuarios2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -198,6 +233,57 @@ public JFrmPrincipal() {
         });
         jMenu5.add(jMnuUsuarios2);
 
+        jMnuUsuarios3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMnuUsuarios3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/livre-de-magie.png"))); // NOI18N
+        jMnuUsuarios3.setMnemonic('v');
+        jMnuUsuarios3.setText("Consultas Usuários");
+        jMnuUsuarios3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMnuUsuarios3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuUsuarios3ActionPerformed(evt);
+            }
+        });
+        jMnuUsuarios3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMnuUsuarios3KeyPressed(evt);
+            }
+        });
+        jMenu5.add(jMnuUsuarios3);
+
+        jMnuUsuarios4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMnuUsuarios4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/chapeau-de-sorciere.png"))); // NOI18N
+        jMnuUsuarios4.setMnemonic('v');
+        jMnuUsuarios4.setText("Consultas Clientes");
+        jMnuUsuarios4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMnuUsuarios4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuUsuarios4ActionPerformed(evt);
+            }
+        });
+        jMnuUsuarios4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMnuUsuarios4KeyPressed(evt);
+            }
+        });
+        jMenu5.add(jMnuUsuarios4);
+
+        jMnuUsuarios5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMnuUsuarios5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/la-magie.png"))); // NOI18N
+        jMnuUsuarios5.setMnemonic('v');
+        jMnuUsuarios5.setText("Consultas Vendas");
+        jMnuUsuarios5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMnuUsuarios5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuUsuarios5ActionPerformed(evt);
+            }
+        });
+        jMnuUsuarios5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMnuUsuarios5KeyPressed(evt);
+            }
+        });
+        jMenu5.add(jMnuUsuarios5);
+
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -206,11 +292,13 @@ public JFrmPrincipal() {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 504, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 643, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 126, Short.MAX_VALUE))
         );
 
         pack();
@@ -258,13 +346,48 @@ public JFrmPrincipal() {
     }//GEN-LAST:event_jMnuUsuarios1KeyPressed
 
     private void jMnuUsuarios2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuarios2ActionPerformed
-         JDlgConsultaProdutos telaConsulta = new JDlgConsultaProdutos(this, true);
+        JDlgConsultaProdutos telaConsulta = new JDlgConsultaProdutos(this, true);
         telaConsulta.setVisible(true);                 // TODO add your handling code here:
     }//GEN-LAST:event_jMnuUsuarios2ActionPerformed
 
     private void jMnuUsuarios2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMnuUsuarios2KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMnuUsuarios2KeyPressed
+
+    private void jMnuUsuarios3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuarios3ActionPerformed
+        JDlgConsultaUsuarios telaConsulta = new JDlgConsultaUsuarios(this, true);
+        telaConsulta.setVisible(true);                // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios3ActionPerformed
+
+    private void jMnuUsuarios3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMnuUsuarios3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios3KeyPressed
+
+    private void jMnuUsuarios4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuarios4ActionPerformed
+        JDlgConsultaClientes telaConsulta = new JDlgConsultaClientes(this, true);
+        telaConsulta.setVisible(true);                  // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios4ActionPerformed
+
+    private void jMnuUsuarios4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMnuUsuarios4KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios4KeyPressed
+
+    private void jMnuUsuarios5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuarios5ActionPerformed
+        JDlgConsultaVenda telaConsulta = new JDlgConsultaVenda(this, true);
+        telaConsulta.setVisible(true);                  // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios5ActionPerformed
+
+    private void jMnuUsuarios5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMnuUsuarios5KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuUsuarios5KeyPressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,6 +425,9 @@ public JFrmPrincipal() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -317,6 +443,10 @@ public JFrmPrincipal() {
     private javax.swing.JMenuItem jMnuUsuarios;
     private javax.swing.JMenuItem jMnuUsuarios1;
     private javax.swing.JMenuItem jMnuUsuarios2;
+    private javax.swing.JMenuItem jMnuUsuarios3;
+    private javax.swing.JMenuItem jMnuUsuarios4;
+    private javax.swing.JMenuItem jMnuUsuarios5;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
