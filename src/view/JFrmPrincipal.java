@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,6 +20,20 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     public JFrmPrincipal() {
         initComponents();
+        try {
+            final Image img = new ImageIcon(getClass().getResource("/imagem/P-1.png")).getImage();
+            setContentPane(new javax.swing.JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+                }
+            });
+            
+            getContentPane().add(jToolBar2);
+            
+        } catch (Exception e) {}
+        
         JDlgLogin telaLogin = new JDlgLogin(this, true);
         telaLogin.setVisible(true);
 
@@ -29,8 +44,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         setTitle("SistemaGiovannaBernazzolli");
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-
-       
+    
 
     }
 
@@ -315,10 +329,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

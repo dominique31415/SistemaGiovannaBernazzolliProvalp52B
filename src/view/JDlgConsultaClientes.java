@@ -4,10 +4,13 @@
  */
 package view;
 
+import bean.GdcbCliente;
 import dao.gdcb_produtosDAO;
 import dao.gdcb_clientesDAO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import tools.Util;
 
 /**
@@ -158,19 +161,67 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-        // TODO add your handling code here:
-         gdcb_clientesDAO clientesDAO = new  gdcb_clientesDAO();
-        List lista;
-        if ((jTxtNome.getText().isEmpty() == false) && (jTxtDataNascimento.getText().isEmpty() == false)){
-            lista = (List) clientesDAO.listNomeData(jTxtNome.getText(), Util.strToDate(jTxtDataNascimento.getText()));
-        }else if (jTxtNome.getText().isEmpty() == false){
-            lista  = (List) clientesDAO.listNome(jTxtNome.getText());
-        }else if (jTxtDataNascimento.getText().isEmpty() == false){
-            lista = (List) clientesDAO.listData(Util.strToDate(jTxtDataNascimento.getText()));
-        }else {
-            lista = (List) clientesDAO.listAll();
+// TODO add your handling code here:
+gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
+List<GdcbCliente> lista;  // Especificar o tipo genérico
+
+String nome = jTxtNome.getText().trim();
+String dataTexto = jTxtDataNascimento.getText().trim();
+
+try {
+    if (!dataTexto.isEmpty()) {
+        // VALIDAÇÃO DA DATA
+        if (!dataTexto.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
+            JOptionPane.showMessageDialog(this, 
+                "Formato de data inválido!\nUse: DD/MM/AAAA",
+                "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        controllerConsultasClientes.setList(lista);
+        
+        Date dataNascimento = Util.strToDate(dataTexto);
+        
+        if (dataNascimento == null) {
+            JOptionPane.showMessageDialog(this, 
+                "Data inválida!", 
+                "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Garantir que está usando o DAO correto
+        if (!nome.isEmpty()) {
+            lista = (List<GdcbCliente>) clientesDAO.listNomeData(nome, dataNascimento);
+        } else {
+            lista = (List<GdcbCliente>) clientesDAO.listData(dataNascimento);
+        }
+        
+    } else if (!nome.isEmpty()) {
+        // Apenas nome - usar DAO de clientes
+        lista = (List<GdcbCliente>) clientesDAO.listNome(nome);
+    } else {
+        // Todos os registros - usar DAO de clientes
+        lista = (List<GdcbCliente>) clientesDAO.listAll();
+    }
+    
+    // Verificar se a lista contém os objetos corretos
+    if (lista != null && !lista.isEmpty()) {
+        Object primeiroItem = lista.get(0);
+        if (!(primeiroItem instanceof GdcbCliente)) {
+            JOptionPane.showMessageDialog(this,
+                "Erro: tipo de objeto incorreto retornado pelo DAO",
+                "Erro Interno", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+    
+    // Passar a lista para o controller
+    controllerConsultasClientes.setList(lista);
+    
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(this, 
+        "Erro na consulta: " + ex.getMessage(),
+        "Erro", JOptionPane.ERROR_MESSAGE);
+    ex.printStackTrace();
+}
     }//GEN-LAST:event_jBtnConsultarActionPerformed
 
     /**

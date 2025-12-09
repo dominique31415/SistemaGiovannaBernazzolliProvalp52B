@@ -61,9 +61,9 @@ public class gdcb_clientesDAO extends AbstractDAO {
         session.getTransaction().commit();
         return lista;
     }
- public Object listNome(String nome) {
+public Object listNome(String nome) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(GdcbUsuarios.class);
+        Criteria criteria = session.createCriteria(GdcbCliente.class); 
         criteria.add(Restrictions.like("gdcbNome", "%" + nome + "%"));
         List lista = criteria.list();
         session.getTransaction().commit();
@@ -72,22 +72,23 @@ public class gdcb_clientesDAO extends AbstractDAO {
 
     public Object listData(Date gdcbDataNascimento) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(GdcbUsuarios.class);
-        criteria.add(Restrictions.ge("gdcbDataNascimento",  gdcbDataNascimento ));
+        Criteria criteria = session.createCriteria(GdcbCliente.class); 
+        criteria.add(Restrictions.ge("gdcbDataNascimento", gdcbDataNascimento));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
 
-    public Object listNomeData(String nome, Date gdcbDataNascimento ) {
+    public Object listNomeData(String nome, Date gdcbDataNascimento) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(GdcbUsuarios.class);
+        Criteria criteria = session.createCriteria(GdcbCliente.class); 
         criteria.add(Restrictions.like("gdcbNome", "%" + nome + "%"));
-        criteria.add(Restrictions.ge("gdcbDataNascimento",  gdcbDataNascimento ));
+        criteria.add(Restrictions.ge("gdcbDataNascimento", gdcbDataNascimento));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
+    
     
     public static void main(String[] args) {
         gdcb_clientesDAO gdcb_clientesDAO = new gdcb_clientesDAO();

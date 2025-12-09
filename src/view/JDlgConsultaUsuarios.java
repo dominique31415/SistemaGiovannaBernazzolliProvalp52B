@@ -6,39 +6,46 @@ package view;
 
 import dao.gdcb_produtosDAO;
 import dao.gdcb_usuariosDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import tools.Util;
 
 /**
  *
- * @author 
+ * @author
  */
 public class JDlgConsultaUsuarios extends javax.swing.JDialog {
-  ControllerConsultasUsuarios controllerConsultasUsuarios;
+
+    ControllerConsultasUsuarios controllerConsultasUsuarios;
+
     /**
-     * Creates new form JDlgUsuariosPesquisar    /**
-     * Creates new form JDlgUsuariosPesquisar
+     * Creates new form JDlgUsuariosPesquisar /** Creates new form
+     * JDlgUsuariosPesquisar
      */
- 
+
     public JDlgConsultaUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Consultas de Usuarios");
-   
+
         controllerConsultasUsuarios = new ControllerConsultasUsuarios();
         gdcb_usuariosDAO usuariosDAO = new gdcb_usuariosDAO();
         List lista = new ArrayList();
         controllerConsultasUsuarios.setList(lista);
         jTable1.setModel(controllerConsultasUsuarios);
-        
+
     //    controllerUsuarios = new ControllerUsuarios();
-    //    UsuariosDAO usuariosDAO = new UsuariosDAO();
-    //    List lista = (List) usuariosDAO.listAll();
-    //    controllerUsuarios.setList(lista);
-    //    jTable1.setModel(controllerUsuarios);
-    
+        //    UsuariosDAO usuariosDAO = new UsuariosDAO();
+        //    List lista = (List) usuariosDAO.listAll();
+        //    controllerUsuarios.setList(lista);
+        //    jTable1.setModel(controllerUsuarios);
     }
 
     /**
@@ -147,7 +154,7 @@ public class JDlgConsultaUsuarios extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-       setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -158,16 +165,27 @@ public class JDlgConsultaUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-        // TODO add your handling code here:
-         gdcb_usuariosDAO usuariosDAO = new  gdcb_usuariosDAO();
+        gdcb_usuariosDAO usuariosDAO = new gdcb_usuariosDAO();
         List lista;
-        if ((jTxtNome.getText().isEmpty() == false) && (jTxtDataNascimento.getText().isEmpty() == false)){
-            lista = (List) usuariosDAO.listNomeData(jTxtNome.getText(), Util.strToDate(jTxtDataNascimento.getText()));
-        }else if (jTxtNome.getText().isEmpty() == false){
-            lista  = (List) usuariosDAO.listNome(jTxtNome.getText());
-        }else if (jTxtDataNascimento.getText().isEmpty() == false){
-            lista = (List) usuariosDAO.listData(Util.strToDate(jTxtDataNascimento.getText()));
-        }else {
+        String nome = jTxtNome.getText().trim();
+        String dataTexto = jTxtDataNascimento.getText().trim();
+        if (!dataTexto.isEmpty()) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            Date dataNascimento = null;
+            try {
+                dataNascimento = sdf.parse(dataTexto);
+            } catch (ParseException ex) {
+                Logger.getLogger(JDlgConsultaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (!nome.isEmpty()) {
+                lista = (List) usuariosDAO.listNomeData(nome, dataNascimento);
+            } else {
+                lista = (List) usuariosDAO.listData(dataNascimento);
+            }
+        } else if (!nome.isEmpty()) {
+            lista = (List) usuariosDAO.listNome(nome);
+        } else {
             lista = (List) usuariosDAO.listAll();
         }
         controllerConsultasUsuarios.setList(lista);
