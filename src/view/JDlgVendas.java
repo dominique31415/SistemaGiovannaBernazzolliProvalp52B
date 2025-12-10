@@ -389,8 +389,6 @@ public class JDlgVendas extends javax.swing.JDialog {
         } else {
             if (JOptionPane.showConfirmDialog(null, "Deseja excluir a venda?", "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 controllerVendProd.removeBean(jTable1.getSelectedRow());
-            
-
             }
         }
 

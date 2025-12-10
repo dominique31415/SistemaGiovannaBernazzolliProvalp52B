@@ -99,6 +99,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jToolBar2.setRollover(true);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/nuit.png"))); // NOI18N
+        jButton4.setText(" Produto");
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -110,6 +111,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jToolBar2.add(jButton4);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/sorciere.png"))); // NOI18N
+        jButton5.setText("Usuário");
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -121,6 +123,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jToolBar2.add(jButton5);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/role-playing.png"))); // NOI18N
+        jButton6.setText("Clientes");
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -132,6 +135,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jToolBar2.add(jButton6);
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/cat-sleep.png"))); // NOI18N
+        jButton7.setText("Consulta Usuário");
         jButton7.setFocusable(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -143,6 +147,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jToolBar2.add(jButton7);
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/dragon.png"))); // NOI18N
+        jButton8.setText("Consulta Produto");
         jButton8.setFocusable(false);
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -335,8 +340,8 @@ public class JFrmPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         pack();
