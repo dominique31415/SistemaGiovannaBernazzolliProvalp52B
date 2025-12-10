@@ -15,33 +15,34 @@ import tools.Util;
 
 /**
  *
- * @author 
+ * @author
  */
 public class JDlgConsultaClientes extends javax.swing.JDialog {
-  ControllerConsultasClientes controllerConsultasClientes;
+
+    ControllerConsultasClientes controllerConsultasClientes;
+
     /**
-     * Creates new form JDlgUsuariosPesquisar    /**
-     * Creates new form JDlgUsuariosPesquisar
+     * Creates new form JDlgUsuariosPesquisar /** Creates new form
+     * JDlgUsuariosPesquisar
      */
- 
+
     public JDlgConsultaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Consultas de Clientes");
-   
+
         controllerConsultasClientes = new ControllerConsultasClientes();
         gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
         List lista = new ArrayList();
         controllerConsultasClientes.setList(lista);
         jTable1.setModel(controllerConsultasClientes);
-        
+
     //    controllerUsuarios = new ControllerUsuarios();
-    //    UsuariosDAO clientesDAO = new UsuariosDAO();
-    //    List lista = (List) clientesDAO.listAll();
-    //    controllerUsuarios.setList(lista);
-    //    jTable1.setModel(controllerUsuarios);
-    
+        //    UsuariosDAO clientesDAO = new UsuariosDAO();
+        //    List lista = (List) clientesDAO.listAll();
+        //    controllerUsuarios.setList(lista);
+        //    jTable1.setModel(controllerUsuarios);
     }
 
     /**
@@ -61,6 +62,7 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
         jTxtDataNascimento = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jBtnConsultar = new javax.swing.JButton();
+        jBtnImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,12 +93,19 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
 
         jLabel1.setText("Nome");
 
-        jLabel2.setText("Data de Aniversário");
+        jLabel2.setText("Data de Nascimento");
 
         jBtnConsultar.setText("Consultar");
         jBtnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnConsultarActionPerformed(evt);
+            }
+        });
+
+        jBtnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/book.png"))); // NOI18N
+        jBtnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnImprimirActionPerformed(evt);
             }
         });
 
@@ -110,7 +119,9 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jBtnOk))
+                        .addComponent(jBtnImprimir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -121,7 +132,8 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnConsultar)))))
+                                .addComponent(jBtnConsultar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -139,10 +151,12 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBtnConsultar))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jBtnOk)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBtnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBtnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -150,7 +164,7 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-       setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -162,67 +176,81 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
 // TODO add your handling code here:
-gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
-List<GdcbCliente> lista;  // Especificar o tipo genérico
+        gdcb_clientesDAO clientesDAO = new gdcb_clientesDAO();
+        List<GdcbCliente> lista;  // Especificar o tipo genérico
 
-String nome = jTxtNome.getText().trim();
-String dataTexto = jTxtDataNascimento.getText().trim();
+        String nome = jTxtNome.getText().trim();
+        String dataTexto = jTxtDataNascimento.getText().trim();
 
-try {
-    if (!dataTexto.isEmpty()) {
-        // VALIDAÇÃO DA DATA
-        if (!dataTexto.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
-            JOptionPane.showMessageDialog(this, 
-                "Formato de data inválido!\nUse: DD/MM/AAAA",
-                "Erro de Formato", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        Date dataNascimento = Util.strToDate(dataTexto);
-        
-        if (dataNascimento == null) {
-            JOptionPane.showMessageDialog(this, 
-                "Data inválida!", 
-                "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        // Garantir que está usando o DAO correto
-        if (!nome.isEmpty()) {
-            lista = (List<GdcbCliente>) clientesDAO.listNomeData(nome, dataNascimento);
-        } else {
-            lista = (List<GdcbCliente>) clientesDAO.listData(dataNascimento);
-        }
-        
-    } else if (!nome.isEmpty()) {
-        // Apenas nome - usar DAO de clientes
-        lista = (List<GdcbCliente>) clientesDAO.listNome(nome);
-    } else {
-        // Todos os registros - usar DAO de clientes
-        lista = (List<GdcbCliente>) clientesDAO.listAll();
-    }
-    
-    // Verificar se a lista contém os objetos corretos
-    if (lista != null && !lista.isEmpty()) {
-        Object primeiroItem = lista.get(0);
-        if (!(primeiroItem instanceof GdcbCliente)) {
+        try {
+            if (!dataTexto.isEmpty()) {
+                // VALIDAÇÃO DA DATA
+                if (!dataTexto.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
+                    JOptionPane.showMessageDialog(this,
+                            "Formato de data inválido!\nUse: DD/MM/AAAA",
+                            "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Date dataNascimento = Util.strToDate(dataTexto);
+
+                if (dataNascimento == null) {
+                    JOptionPane.showMessageDialog(this,
+                            "Data inválida!",
+                            "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Garantir que está usando o DAO correto
+                if (!nome.isEmpty()) {
+                    lista = (List<GdcbCliente>) clientesDAO.listNomeData(nome, dataNascimento);
+                } else {
+                    lista = (List<GdcbCliente>) clientesDAO.listData(dataNascimento);
+                }
+
+            } else if (!nome.isEmpty()) {
+                // Apenas nome - usar DAO de clientes
+                lista = (List<GdcbCliente>) clientesDAO.listNome(nome);
+            } else {
+                // Todos os registros - usar DAO de clientes
+                lista = (List<GdcbCliente>) clientesDAO.listAll();
+            }
+
+            // Verificar se a lista contém os objetos corretos
+            if (lista != null && !lista.isEmpty()) {
+                Object primeiroItem = lista.get(0);
+                if (!(primeiroItem instanceof GdcbCliente)) {
+                    JOptionPane.showMessageDialog(this,
+                            "Erro: tipo de objeto incorreto retornado pelo DAO",
+                            "Erro Interno", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            // Passar a lista para o controller
+            controllerConsultasClientes.setList(lista);
+
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
-                "Erro: tipo de objeto incorreto retornado pelo DAO",
-                "Erro Interno", JOptionPane.ERROR_MESSAGE);
-            return;
+                    "Erro na consulta: " + ex.getMessage(),
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
-    }
-    
-    // Passar a lista para o controller
-    controllerConsultasClientes.setList(lista);
-    
-} catch (Exception ex) {
-    JOptionPane.showMessageDialog(this, 
-        "Erro na consulta: " + ex.getMessage(),
-        "Erro", JOptionPane.ERROR_MESSAGE);
-    ex.printStackTrace();
-}
     }//GEN-LAST:event_jBtnConsultarActionPerformed
+
+    private void jBtnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnImprimirActionPerformed
+        try {
+            boolean completa = jTable1.print();
+            if (completa) {
+                Util.mensagem("Enviado para impressao PDF com supimpissidade.");
+            } else {
+                Util.mensagem("Impressão Desupimpa.");
+            }
+        } catch (java.awt.print.PrinterException e) {
+            Util.mensagem("Erro ou cancelamento na hora de imprimir: " + e.getMessage());
+            System.err.println("Erro na hora de imprimir: " + e.getMessage());
+        }      
+    }//GEN-LAST:event_jBtnImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,6 +327,7 @@ try {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnConsultar;
+    private javax.swing.JButton jBtnImprimir;
     private javax.swing.JButton jBtnOk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
