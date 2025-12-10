@@ -168,7 +168,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         jCboFuncionario = new javax.swing.JComboBox<GdcbFuncionario>();
         jCboClientess = new javax.swing.JComboBox<GdcbCliente>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jBtnExcluirProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/alphabet_16179249.png"))); // NOI18N
         jBtnExcluirProd.addActionListener(new java.awt.event.ActionListener() {

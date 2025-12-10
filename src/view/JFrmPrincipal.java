@@ -29,11 +29,12 @@ public class JFrmPrincipal extends javax.swing.JFrame {
                     g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
                 }
             });
-            
+
             getContentPane().add(jToolBar2);
-            
-        } catch (Exception e) {}
-        
+
+        } catch (Exception e) {
+        }
+
         JDlgLogin telaLogin = new JDlgLogin(this, true);
         telaLogin.setVisible(true);
 
@@ -44,7 +45,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         setTitle("SistemaGiovannaBernazzolli");
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-    
 
     }
 
@@ -445,7 +445,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-           JDlgConsultaProdutos telaProdutos = new JDlgConsultaProdutos(this, true);
+        JDlgConsultaProdutos telaProdutos = new JDlgConsultaProdutos(this, true);
         telaProdutos.setVisible(true);          // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
