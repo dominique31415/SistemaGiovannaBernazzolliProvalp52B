@@ -387,8 +387,10 @@ public class JDlgVendas extends javax.swing.JDialog {
         if (jTable1.getSelectedRow() == -1) {
             Util.mensagem("Precisa selecionar uma linha.");
         } else {
-            if (Util.pergunta("Deseja excluir o produto ?") == true) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja excluir a venda?", "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 controllerVendProd.removeBean(jTable1.getSelectedRow());
+            
+
             }
         }
 
